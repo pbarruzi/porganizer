@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static widget_tweaks %}
+
+<!-- 
+Template Name: Definicoes do template base para todo o projeto
+-->
+<html lang="pt_br">
+    <!-- begin::Head -->
+    <head>
+        <meta charset="utf-8" />
+
+         <title>
+            {% block title %} | &nbsp;{% if not IN_PRODUCTION %} (HOMOLOG) {% endif%} 
+            {% endblock %}
+        </title>
+
+        <meta name="description" content="Latest updates and statistic charts">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+
+        <!--begin::Web font -->
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+
+        <script>
+            WebFont.load({
+            google: {"families":["Poppins:300,400,500,600,700","Roboto:300,400,500,600,700"]},
+            active: function() {
+                sessionStorage.fonts = true;
+            }
+          });
+        </script>
+        
+        {% block header-extra-js %}
+        
+        {% endblock header-extra-js %}
+        
+        {% if favicon_image %}
+            <link rel="shortcut icon" href="{{MEDIA_URL}}{{favicon_image}}"/>
+        {% else %}
+            <link rel="shortcut icon" href="{% static 'media/img/favicon/favicon.ico' %}"/>
+        {% endif %}
+
+    </head>
+    <!-- end::Head -->
+    
+    <!-- begin::Body  -->
+    <body class="body">    
+        {% block page-content %}
+        {% for message in messages %}
+                <div class="alert {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+        <!-- Conteúdo das páginas vão aqui -->
+    	{% endblock page-content %}
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        {% block page-extra-scripts %}
+            <!-- javascripts no fim do body -->
+    	{% endblock page-extra-scripts %}
+        <!--end::Page Scripts -->
+    </body>
+    <!-- end::Body -->
+</html>

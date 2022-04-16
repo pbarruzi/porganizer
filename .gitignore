@@ -1,0 +1,42 @@
+### Python ###
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+
+# Translations
+*.mo
+*.pot
+
+# Sphinx documentation
+docs/_build/
+
+
+### Projeto ###
+*.minicom
+*.sqlite3
+*.log
+*.pyc
+.env
+
+
+# diretório dos uploads
+/media/
+
+
+# deploy
+/static/
+
+# dev-pedro
+runserver.sh
+sql_shell_plus.sh
+shell_plus.sh
+TODO

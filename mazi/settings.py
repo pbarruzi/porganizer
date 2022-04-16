@@ -44,11 +44,15 @@ INSTALLED_APPS = [
 
 PROJECT_APPS = [
     'account.apps.AccountConfig',
+    'core.apps.CoreConfig',
     'atendimento.apps.AtendimentoConfig',
     'curador.apps.CuradorConfig',
+    'site_setup.apps.SiteSetupConfig',
 ]
 
 THIRD_PARTY_APPS = [
+    'widget_tweaks',
+    'django_summernote',
 ]
 
 INSTALLED_APPS += PROJECT_APPS
@@ -78,6 +82,8 @@ TEMPLATES = [
         ],
         'OPTIONS': {
             'context_processors': [
+                'site_setup.context_processors.site_settings',
+                'site_setup.context_processors.client_bg_img',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -145,3 +151,36 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Email settings
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'registri@minicom.com.br'
+EMAIL_HOST_PASSWORD = 'Registri@2020Abril'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'SOCIALA <registri@minicom.com.br>'
+
+
+# Constantes de Login
+# LOGIN_URL - nome da url de login. Util quando utilizar decorator.
+LOGIN_URL = 'account:login'
+LOGIN_REDIRECT_URL = 'account:home'
+LOGOUT_URL = 'account:logout'
+
+
+# Media Location
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+#summernote
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+## SITE LOCATIONS
+SITE_MEDIA = '__site__/'
+IMAGENS = 'img/'
+CSS = 'css/'
+BACKGROUND_IMAGE = SITE_MEDIA + IMAGENS + 'bg/'
+LOGO_IMAGE = SITE_MEDIA + IMAGENS + 'logo/'
+FAVICON_IMAGE = SITE_MEDIA + IMAGENS + 'favicon/'
+LANDING_BG_IMAGE = 'landing/assets/img/'
+CSS_PATH = SITE_MEDIA + CSS

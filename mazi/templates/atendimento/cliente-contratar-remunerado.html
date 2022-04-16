@@ -1,0 +1,120 @@
+{% extends "core/base.html" %}
+{% load static widget_tweaks i18n %}
+{% block page-content %}
+    {{ block.super }}
+    <h1> Olá {{ user.name }}, </h1>
+    <h2> {% trans "Você está prestes a contratar um atendimento" %}  </h2>
+    <h3>{% trans 'Veja algumas coisas sobre ' %} {{ curador }} </h3>
+    </br>
+    {% blocktrans with qt_atendimentos=curador.curador_estatisticas.qt nt_media=curador.curador_estatisticas.media %}
+        Já realizou {{ qt_atendimentos }} atendimentos. </br>
+        Tem uma nota média de {{nt_media}} nos atendimentos. </br>
+    {% endblocktrans %}        
+    <h3> Suas Especialidades são:</h3>
+    <div class="col-4 lista-especialidades">
+        {% for especialidade in curador.curador_especialidades.all %}
+            <em>--> {{ especialidade.especialidade.titulo }}</em>
+            </br>
+        {% endfor %}
+    </div>
+    </br>
+    <div class="row">
+
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                 <form method="post">
+                    {% csrf_token %}
+                    <ul class="list-inline">
+
+                        <li class="list-inline-item"> <strong class="text-muted">{% trans 'Contratar um atendimento' %}</strong></li>
+                        <li class="list-inline-item"> 
+                             <div id="curador_spinner" class="m-loader m-loader--primary risk-spinner"><p></p></div>
+                        </li>
+
+                        <li class="list-inline-item"> 
+                            <a 
+                                id="curador_selecionado"
+                                class="btn btn-secondary"
+                                title="{% trans 'Clique para Registrar a Contratação.' %}"
+                                onclick="contratar_curador({{ curador.pk }})"
+                            >
+                                <span>
+                                    <i class="la la-pencil-square fa-2x"></i>
+                                    <span class="">{% trans 'Quero contratar' %}</span>
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                 </form>
+            </li>
+        </ul>    
+
+        <div class="depoimentos">
+            <h3> {% trans 'Depoimentos' %} </h3>
+            {% for depoimento in curador.consultas_curador.all %}
+                {% if depoimento.data_depoimento %}
+                    <strong> {{ depoimento.data_depoimento }} - {{ depoimento.cliente }}</strong> 
+                    ({{ depoimento.avaliacao_cliente }})
+                    </br>
+                    <em> {{ depoimento.depoimento_cliente }} </em>
+                    </br> </br>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <h2>{{ curador.curadoraboutme.titulo }}</h2>
+    <p>
+        <em>{{ curador.curadoraboutme.descricao | safe }}</em>
+    </p>
+{% endblock page-content %}
+
+{% block page-extra-scripts %}
+
+    <script type="text/javascript" language="javascript">
+      function contratar_curador(curador_pk){
+
+        // recebe user_id e registra a contratacao
+        anchor_text_id = "curador_selecionado";
+        anchor_clicado = document.getElementById(anchor_text_id);
+        icon_element = anchor_clicado.firstElementChild;
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;        
+        spinner_element = document.getElementById("curador_spinner");
+        spinner_element.style.display =  "inline-block";
+
+        $.ajax({
+          type: "POST",
+          data: {
+            csrfmiddlewaretoken: csrftoken,
+            curador_pk: curador_pk
+          },
+          success: function(result){
+            console.log('--------------->', curador_pk);
+            location.reload();
+          },
+
+          error: function(result){
+            anchor_clicado.disabled=true;
+            anchor_clicado.innerHTML = 'Ooops! Erro no processo';
+          },
+
+          warning: function(result){
+            anchor_clicado.disabled=true;
+            anchor_clicado.innerHTML = 'Advertência no processo';
+          },
+
+          // os argumentos são passados no 'data' do ajax
+          url: "{% url 'agendamento:json-contratar-curador' %}",
+
+        });
+
+        console.log('O curador em foco é');
+        console.log(curador_pk);
+
+      }
+    </script>
+
+{% endblock page-extra-scripts %} 

@@ -1,5 +1,6 @@
 import re
 from django.db import models
+from django.db.models import Count, Avg
 from django.contrib.auth.models import (
     AbstractBaseUser,
     UserManager,
@@ -7,11 +8,13 @@ from django.contrib.auth.models import (
 )
 from django.utils.translation import gettext_lazy as _
 from django.core import validators
+from core import models as core_models
 
-ADMINISTRADOR = 0     # Administrador do sistema. Admin
-STAFF = 1             # Compliance do sistema. Tarefas auxiliares ao Admin
-CURADOR = 4           # Profissional que faz atendimento à consulentes
+ADMINISTRADOR = 0  # Administrador do sistema. Admin
+STAFF = 1          # Compliance do sistema. Tarefas auxiliares ao Admin
+CURADOR = 4        # Profissional que faz atendimento à consulentes
 CLIENTE = 5        # Pessoa que se cadastra no sistema e marca uma consulta
+
 
 class CuradorAtivoManager(models.Manager):
     """
@@ -22,9 +25,10 @@ class CuradorAtivoManager(models.Manager):
         return super()\
             .get_queryset()\
             .filter(
-                user_type=User.CURADOR,
+                user_type=CURADOR,
                 is_active=True,
             )
+
 
 class ClienteAtivoManager(models.Manager):
     """
@@ -35,7 +39,7 @@ class ClienteAtivoManager(models.Manager):
         return super()\
             .get_queryset()\
             .filter(
-                user_type=User.CLIENTE,
+                user_type=CLIENTE,
                 is_active=True,
             )
 
@@ -97,7 +101,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     user_type = models.PositiveSmallIntegerField(
         _('Tipo usuário'),
         choices=USER_TYPE_CHOICES,
-        default=STAFF,
+        default=CLIENTE,
     )
     user_picture = models.ImageField(
         _('Imagem'),
@@ -117,7 +121,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = UserManager()
     curadores = CuradorAtivoManager()
-    cliente = ClienteAtivoManager()
+    clientes = ClienteAtivoManager()
 
     class Meta:
         verbose_name = _('Usuário')
@@ -127,23 +131,79 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.name or self.username
 
     @property
-    def qtde_atendimentos_curador(self):
+    def curador_estatisticas(self):
         """
-        Retorna a quantidade de atendimentos do curador.
+        Retorna as estatísticas de atendimentos do curador:
+            - curador - pk do curador
+            - qt - quantidade total de atendimentos do curador
+            - media - nota média dada pelos clientes
+        """
+        statis = {'curador': self.pk, 'qt': 0, 'media': 0.0}
+        
+        if self.user_type != CURADOR:
+            return statis
+
+        if not hasattr(self, 'consultas_curador'):
+            return statis
+        
+        atendimento_qs = self.consultas_curador.all()
+        statis = atendimento_qs.values('curador',)\
+            .annotate(
+                qt=Count('curador'),
+                media=Avg('avaliacao_cliente'),
+            )
+        return statis[0]
+
+    @property
+    def curador_status_atendimentos(self):
+        """
+        Retorna os status de atendimentos do curador:
+            - curador - pk do curador
+            - 0 - quantidade de atendimediamentos em aberto
+            - 1 - quantidade de atendimentos encerrados
+        """
+        status = [{'curador': 3, 'status_agendamento': 0, 'qt': 0}, {'curador': 3, 'status_agendamento': 1, 'qt': 0}]
+        
+        if self.user_type != CURADOR:
+            return status
+
+        if not hasattr(self, 'consultas_curador'):
+            return status
+        
+        atendimento_qs = self.consultas_curador.all()
+        status = atendimento_qs.values('curador','status_agendamento')\
+            .annotate(
+                qt=Count('status_agendamento'),
+            )
+        return status
+
+    @property
+    def curador_remunerado(self):
+        """
+        Retorna se o curador é Remunerado ou Gratuíto
+        A partir de um certo número de atendimento e
+        de uma certa média de avaliação, o curador entra
+        na faixa de Remunerado. Abaixo disto ele está na faixa de
+        gratuíto.
+        As bases estão definidas em core.config
         """
 
         if self.user_type != CURADOR:
-            return 0
+            return False
 
-        return 10
+        config = core_models.Configuracao.objects.first()
+        
+        if not config:
+            return False
 
-    @property
-    def qtde_atendimentos_cliente(self):
-        """
-        Retorna a quantidade de atendimentos do cliente.
-        """
-
-        if self.user_type != CLIENTE:
-            return 0
-
-        return 20
+        stats = self.curador_estatisticas
+        qt = stats.get('qt', 0)
+        media = stats.get('media', 0.0)
+        
+        if config.appointments_to_pay > qt:
+            return False
+        
+        if config.average_to_pay > media:
+            return False
+        
+        return True

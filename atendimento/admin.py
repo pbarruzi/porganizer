@@ -15,7 +15,6 @@ class AtendimentoAdmin(admin.ModelAdmin):
     
     list_filter = (
         'curador',
-        'curador__especialidade',
     )
 
 admin.site.register(Atendimento, AtendimentoAdmin)

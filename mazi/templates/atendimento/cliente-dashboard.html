@@ -1,0 +1,61 @@
+{% extends "core/base.html" %}
+{% load static widget_tweaks i18n %}
+{% block page-content %}
+    {{ block.super }}
+    <h1>{{ landing_page_wellcome_phrase }}</h1>
+    <h6>
+        <em>{{ landing_page_wellcome_text }}</em>
+    </h6>
+    <h2> Olá {{ user.name }} </h2>
+    <div class="row">
+        <h3>{% trans "Lista dos nossos Curadores Remunerados" %}</h3>
+        <div class="col-4 lista-curadores">
+            {% for curador in remunerados %}
+                <strong>{{ curador }}</strong>
+                (atendimentos:{{ curador.curador_estatisticas.qt }})
+                (média:{{ curador.curador_estatisticas.media }})
+            </br>
+            {% for especialidade in curador.curador_especialidades.all %}
+            </br>
+            -->{{ especialidade.especialidade }}
+        {% endfor %}
+    </br></br>
+    <a class="btn" href="{% url 'agendamento:cliente-contratar-remunerado' curador.pk %}">Contratar</a>
+</br>
+{% endfor %}
+</div>
+<h3>{% trans "Lista dos nossos Curadores atendendo Gratuitamente" %}</h3>
+<div class="col-4 lista-curadores">
+    {% for curador in nao_remunerados %}
+        <strong>{{ curador }}</strong>
+        (atendimentos:{{ curador.curador_estatisticas.qt }})
+        (média:{{ curador.curador_estatisticas.media }})
+    </br>
+    {% for especialidade in curador.curador_especialidades.all %}
+    </br>
+    -->{{ especialidade.especialidade }}
+{% endfor %}
+</br>
+</br>
+<a class="button" href="{% url 'agendamento:cliente-contratar-free' curador.pk %}">Agendar Atendimento com {{ curador }}</a>
+</br>
+</br>
+</br>
+{% endfor %}
+</div>
+<h3>{% trans "Histórico dos seus Atendimentos" %}</h3>
+<div class="col-4 lista-passado">
+    {% for passado in atendimentos_passados %}
+        {{ passado }}
+    </br>
+{% endfor %}
+</div>
+<h3>{% trans "Aendimentos Correntes" %}</h3>
+<div class="col-4 lista-corrente">
+    {% for corrente in atendimentos_correntes %}
+        {{ corrente }}
+    </br>
+{% endfor %}
+</div>
+</div>
+{% endblock page-content %}

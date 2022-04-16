@@ -1,6 +1,19 @@
 from django.contrib import admin
+from curador import models
+from django_summernote.admin import SummernoteModelAdmin
 
-from .models import Especialidade, CuradorEspecialidade
+
+class AboutMeAdmin(SummernoteModelAdmin):
+
+    Summernote_fields = ['descricao']
+    # selecionar quais campos participam da lista
+    list_display = (
+        'descricao',
+    )
+    
+    list_filter = (
+    )
+
 
 class EspecialidadeAdmin(admin.ModelAdmin):
 
@@ -25,5 +38,6 @@ class CuradorEspecialidadeAdmin(admin.ModelAdmin):
         'especialidade',
     )
 
-admin.site.register(Especialidade, EspecialidadeAdmin)
-admin.site.register(CuradorEspecialidade, CuradorEspecialidadeAdmin)
+admin.site.register(models.CuradorAboutMe, AboutMeAdmin)
+admin.site.register(models.Especialidade, EspecialidadeAdmin)
+admin.site.register(models.CuradorEspecialidade, CuradorEspecialidadeAdmin)

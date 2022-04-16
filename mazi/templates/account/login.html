@@ -1,0 +1,98 @@
+{% extends "core/base.html" %}
+{% load static widget_tweaks i18n %}
+
+{% block page-content %}
+    {{block.super}}
+
+    <div class="login-box">
+      <!-- /.login-INICIO -->
+
+      <div class="">
+        <p class="">Faça o login para iniciar sua sessão  </p>
+        <form method="post">
+
+          {% csrf_token %}
+          {% for error in form.non_field_errors %}
+          <div class="alert alert-danger">
+              {{ error }}
+          </div>
+          {% endfor %}
+
+          <div class="form-group {% if form.username.errors %} has-error{% endif %}">
+            {% render_field form.username class="form-control" placeholder="entre com sua conta ou e-mail" %}
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            <!-- erros do username -->
+              {% for error in form.username.errors %}
+              <span class="help-block">{{ error }}</span>
+              {% endfor %}
+          </div>
+
+          <div class="form-group  {% if form.password.errors %} has-error{% endif %}">
+            {% render_field form.password class="form-control" placeholder="senha" %}
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+
+            <!--  erros da senha -->
+              {% for error in form.password.errors %}
+              <span class="help-block">{{ error }}</span>
+              {% endfor %}
+
+          </div>
+          <div class="row">
+            <div class="col-xs-4">
+              <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
+            </div>
+            <!-- /.col -->
+          </div>
+
+          <div class="row">
+            <div class="col-xs-6"></br>
+
+              <ul class="list-inline">
+                <li class="list-inline-item">
+                    <div class="m-checkbox-list">
+                        <label class="m-checkbox m-checkbox--check-bold">
+                            <input type="checkbox" id="show_hide_box" onclick ="reveal()"> <small class="text-muted">{% trans 'Mostrar/Esconder senha' %}</small>
+                            <span></span>
+                        </label>
+                    </div>
+                </li>
+                <li class="list-inline-item ">
+                    <div class="col ">
+                        <a href="{% url 'account:forgot-password' %}" id="login_forget_password" class="">
+                            {% trans 'Esqueceu a senha?' %}
+                        </a>
+
+                    </div>
+                </li>
+                <li class="list-inline-item ">
+                  <div class="col ">
+                      <a href="{% url 'account:registrar-cliente' %}" id="login_create_user" class="">
+                          {% trans 'Criar uma conta' %}
+                      </a>
+
+                  </div>
+              </li>
+            </ul>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+      <!-- /.login FIM -->
+    </div>
+    <!-- /.login-box -->
+{% endblock %}
+
+
+{% block page-extra-scripts %}
+    <script type="text/javascript">
+        function reveal()
+        {
+        if(document.getElementById('show_hide_box').checked)
+          {document.getElementById("id_password").type='text';}
+        else
+        document.getElementById("id_password").type='password';
+        }
+  </script>   
+{% endblock %}

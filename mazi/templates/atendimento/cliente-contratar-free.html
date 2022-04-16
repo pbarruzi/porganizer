@@ -1,0 +1,36 @@
+{% extends "core/base.html" %}
+{% load static widget_tweaks i18n %}
+{% block page-content %}
+    {{ block.super }}
+    <h1>{{ landing_page_wellcome_phrase }}</h1>
+    <h4>
+        <em>{{ landing_page_wellcome_text }}</em>
+    </h4>
+    <h2> Olá, {{ user.name }} </h2>
+    <div class="row">
+        <h3>{% trans "Você está contratando " %} {{ curador }} </h3>
+            (atendimentos:{{ curador.curador_estatisticas.qt }}) </br> 
+            (média:{{ curador.curador_estatisticas.media }})
+
+        </br> </br> 
+        <div class="col-4 lista-especialidades">
+            {% for especialidade in curador.curador_especialidades.all %}
+                <em>--> {{ especialidade.especialidade.titulo }}</em>
+                </br>
+            {% endfor %}
+        </div>
+        </br>
+        <a class="button" href="#">Confirmar Agendamento</a>
+
+        <div class="depoimentos">
+            <h3> {% trans 'Depoimentos' %} </h3>
+            {% for depoimento in curador.consultas_curador.all %}
+                <strong> {{ depoimento.data_depoimento }} - {{ depoimento.cliente }}</strong> 
+                ({{ depoimento.avaliacao_cliente }})
+                </br>
+                <em> {{ depoimento.depoimento_cliente }} </em>
+            </br> </br>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock page-content %}

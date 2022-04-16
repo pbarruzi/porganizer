@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from account import models as models_account
 
 
+
 class Especialidade(models.Model):
     """
     Informações sobre especialidades que um curador pode atuar
@@ -52,4 +53,33 @@ class CuradorEspecialidade(models.Model):
         return '{}-{}'.format(
             self.curador,
             self.especialidade.titulo,
+        )
+
+
+class CuradorAboutMe(models.Model):
+    """
+    Informações Adicionais sobre o Curador
+    """
+    curador = models.OneToOneField(
+        models_account.User,
+        verbose_name=_('Curador'),
+        on_delete=models.CASCADE,
+    )
+    titulo = models.CharField(
+        verbose_name=_('Title About Me'),
+        max_length=128,
+        null=True,
+        blank=True,
+    )
+    descricao = models.TextField(
+        verbose_name=_('About me text'),
+        null=True,
+    )
+
+    class Meta:
+        verbose_name = _('Curador About me')
+
+    def __str__(self):
+        return '{}'.format(
+            self.curador,
         )

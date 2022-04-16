@@ -1,0 +1,44 @@
+{% extends "core/base.html" %}
+{% load static widget_tweaks i18n %}
+{% block title %}{{ block.super }} Criação de usuário {% endblock title %}
+{% block page-content %}
+    <div class="m-login__signin">
+        <div class="m-login__head">
+            <h3 class="m-login__title">
+                {% block title_cria_user %}<!-- Titulo do Formulário de Criação de Usuário -->{% endblock %}
+            </h3>
+        </div>
+        <form method="post" class="m-login__form m-form " action="">
+            {% csrf_token %}
+            {% for error in form.non_field_errors %}<div class="alert alert-danger">{{ error }}</div>{% endfor %}
+            {% for field in form %}
+                <div class="form-group m-form__group{% if field.errors %} has-error{% endif %}">
+                    {% render_field field class="form-control m-input" placeholder=field.label name=field.auto_id %}
+                    {% for error in field.errors %}<span class="text-danger help-block ">{{ error }}</span>{% endfor %}
+                </div>
+            {% endfor %}
+            <div class="row form-group m-form__group m-login__form-sub">
+                <div class="col m--align-left">
+                    <label class="m-checkbox m-checkbox--focus">
+                        <input type="checkbox" name="agree">
+                    Concordo <a href="#" class="m-link m-link--focus">com os Termos e Condições</a>.
+                    <span></span>
+                </label>
+                <span class="m-form__help"></span>
+            </div>
+        </div>
+        <div class="m-login__form-action">
+            <button type="submit"
+                    id="xm_login_signup_submit"
+                    class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">
+                Registrar
+            </button>
+            <button type="submit"
+                    id="m_login_signup_cancel"
+                    class="btn btn-outline-focus  m-btn m-btn--pill m-btn--custom">
+                Voltar
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock page-content %}
