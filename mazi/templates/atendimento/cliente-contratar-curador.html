@@ -33,17 +33,12 @@
                         </li>
 
                         <li class="list-inline-item"> 
-                            <a 
-                                id="curador_selecionado"
-                                class="btn btn-secondary"
-                                title="{% trans 'Clique para Registrar a Contratação.' %}"
-                                onclick="contratar_curador({{ curador.pk }})"
-                            >
+                            <button type="submit" name="save_button" id="save_button" class="btn btn-success ">
                                 <span>
-                                    <i class="la la-pencil-square fa-2x"></i>
-                                    <span class="">{% trans 'Quero contratar' %}</span>
+                                    <span>{% trans 'Quero Contratar' %}</span>
+
                                 </span>
-                            </a>
+                            </button>
                         </li>
 
                     </ul>

@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+{% load static widget_tweaks i18n %}
+{% block page-content %}
+    <div class="container">
+        <h2>{% trans "Lista dos nossos Curadores Remunerados" %}</h2>
+        <div class="lista-curadores">
+            {% for curador in remunerados %}
+                <strong>{{ curador }}</strong>
+                (atendimentos:{{ curador.curador_estatisticas.qt }})
+                (média:{{ curador.curador_estatisticas.media }})
+                </br>
+                {% for especialidade in curador.curador_especialidades.all %}
+                    </br>
+                    -->{{ especialidade.especialidade }}
+                {% endfor %}
+
+                </br>
+                </br>
+                <a class="btn"
+                href="{% url 'agendamento:cliente-contratar-curador' curador.pk %}">Contratar</a>
+                </br>
+            {% endfor %}
+    </div>
+{% endblock page-content %}
+<div

@@ -9,14 +9,40 @@ urlpatterns = [
     # para a tela adequada
 
     path(
-        'cliente/dashboard/',
+        'atendimento/dashboard/',
         views.AtendimentoDashboardView.as_view(),
+        name='atendimento-dashboard'
+    ),
+
+    # clientes    
+    path(
+        'cliente/contratar/<int:curador_id>/curador',
+        views.ClienteContratarCuradorView.as_view(),
+        name='cliente-contratar-curador'
+    ),
+    path(
+        'cliente/dashboard/',
+        views.ClienteDashboardView.as_view(),
         name='cliente-dashboard'
+    ),
+    
+    # curadores não remunerados
+    path(
+        'curador/free/list',
+        views.CuradoresFreeListView.as_view(),
+        name='curador-free-list'
     ),
     path(
         'cliente/contratar/<int:curador_id>/curador/free',
         views.AtendimentoContratarFreeView.as_view(),
         name='cliente-contratar-free'
+    ),
+    
+    # curadores remunerados
+    path(
+        'curador/remunerado/list',
+        views.CuradoresRemuneradosListView.as_view(),
+        name='curador-remunerado-list'
     ),
     path(
         'cliente/contratar/<int:curador_id>/curador/remunerado',

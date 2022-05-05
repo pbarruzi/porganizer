@@ -147,12 +147,13 @@ class User(AbstractBaseUser, PermissionsMixin):
             return statis
         
         atendimento_qs = self.consultas_curador.all()
-        statis = atendimento_qs.values('curador',)\
+        statis_qs = atendimento_qs.values('curador',)\
             .annotate(
                 qt=Count('curador'),
                 media=Avg('avaliacao_cliente'),
             )
-        return statis[0]
+            
+        return statis_qs[0] if statis_qs else statis
 
     @property
     def curador_status_atendimentos(self):

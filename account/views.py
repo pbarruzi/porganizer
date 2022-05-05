@@ -83,7 +83,7 @@ def home(request):
         elif user.user_type == CURADOR:
             return redirect('curador:dashboard')
         elif user.user_type == CLIENTE:
-            return redirect('agendamento:cliente-dashboard')
+            return redirect('agendamento:atendimento-dashboard')
 
     return render(request, 'core/index.html')
 

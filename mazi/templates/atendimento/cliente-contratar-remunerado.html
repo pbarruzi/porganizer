@@ -18,15 +18,14 @@
         {% endfor %}
     </div>
     </br>
-    <div class="row">
-
+    <div class="container">
         <ul class="list-inline">
             <li class="list-inline-item">
                  <form method="post">
                     {% csrf_token %}
                     <ul class="list-inline">
 
-                        <li class="list-inline-item"> <strong class="text-muted">{% trans 'Contratar um atendimento' %}</strong></li>
+                        <li class="list-inline-item"> <strong class="text-muted">{% trans '' %}</strong></li>
                         <li class="list-inline-item"> 
                              <div id="curador_spinner" class="m-loader m-loader--primary risk-spinner"><p></p></div>
                         </li>
@@ -64,7 +63,6 @@
             {% endfor %}
         </div>
     </div>
-
 
     <h2>{{ curador.curadoraboutme.titulo }}</h2>
     <p>

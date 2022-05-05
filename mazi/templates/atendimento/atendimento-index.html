@@ -1,0 +1,29 @@
+{% extends "core/base.html" %}
+{% load static widget_tweaks i18n %}
+{% block page-content %}
+<div class="container-fluid">
+    {{ block.super }}
+        <h2>Olá Index {{ user.name }}</h2>
+        <h3>{{ landing_page_wellcome_phrase }}</h3>
+        <h6>
+            <em>{{ landing_page_wellcome_text | safe }}</em>
+        </h6>
+        <div class="row">
+            <div class="col-lg-6 lista-curadores">
+                <h2>{% trans "Lista dos nossos Curadores Remunerados" %}</h2>
+                    <a class="btn"
+                        href="{% url 'agendamento:curador-remunerado-list' %}">
+                        <h3>{% trans 'Conhecer nossos curadores ' %}</h3>
+                    </a>
+            </div>
+
+            <div class="col-lg-6 lista-curadores">
+                <h2>{% trans "Lista dos nossos Curadores atendendo Gratuitamente" %}</h2>
+                <a class="btn"
+                    href="{% url 'agendamento:curador-free-list' %}">
+                    <h3>{% trans 'Conhecer nossos curadores ' %}</h3>
+                </a>
+    </div>
+        </div>
+    </div>
+  {% endblock page-content %}
