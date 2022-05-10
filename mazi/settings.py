@@ -57,6 +57,7 @@ PROJECT_APPS = [
 THIRD_PARTY_APPS = [
     'widget_tweaks',
     'django_summernote',
+    'star_ratings',
 ]
 
 INSTALLED_APPS += PROJECT_APPS
@@ -162,6 +163,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Additional locations of static files
+STATICFILES_DIRS = (
+    root('assets'),
+)
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -199,3 +204,6 @@ LOGO_IMAGE = SITE_MEDIA + IMAGENS + 'logo/'
 FAVICON_IMAGE = SITE_MEDIA + IMAGENS + 'favicon/'
 LANDING_BG_IMAGE = 'landing/assets/img/'
 CSS_PATH = SITE_MEDIA + CSS
+
+# rating
+# STAR_RATINGS_RERATE = True

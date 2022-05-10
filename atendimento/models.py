@@ -70,6 +70,17 @@ class Atendimento(models.Model):
         choices=AGENDAMENTO_STATUS_CHOICES,
         default=ABERTO,
     )
+    anotacoes_curador = models.TextField(
+        verbose_name=_('Anotações do Curador para acompanhamento'),
+        null=True,
+        blank=True,
+    )
+    data_encerramento = models.DateField(
+        verbose_name=_('Data do Enceramento'),
+        help_text=_('(DD/MM/AAAA)'),
+        null=True,
+        blank=True,
+    )
     
     class Meta:
         verbose_name = _('Atendimento')
@@ -84,3 +95,17 @@ class Atendimento(models.Model):
             self.avaliacao_cliente,
         )
 
+    @property
+    def avaliou_curador(self):
+        score = None
+        
+        try:
+            qs = self.cliente\
+                .userrating_set\
+                .filter(rating__object_id=self.curador_id)\
+                .first()
+            if qs:
+                score = qs.score
+        except:
+            pass
+        return score

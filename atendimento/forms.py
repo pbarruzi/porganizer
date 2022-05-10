@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from atendimento import models
 
-class AtendimentoForm(ModelForm):
+class AtendimentoAvalForm(ModelForm):
     class Meta:
         model = models.Atendimento
-        fields = ['curador']
+        fields = ['depoimento_cliente',]

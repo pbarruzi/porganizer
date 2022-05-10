@@ -21,11 +21,23 @@ urlpatterns = [
         name='cliente-contratar-curador'
     ),
     path(
+        'cliente/avaliar/<int:pk>/atendimento',
+        views.ClienteAvaliarCuradorView.as_view(),
+        name='cliente-avaliar-curador'
+    ),
+    path(
         'cliente/dashboard/',
         views.ClienteDashboardView.as_view(),
         name='cliente-dashboard'
     ),
     
+    # curadores
+        path(
+        'curador/dashboard/',
+        views.CuradorDashboardView.as_view(),
+        name='curador-dashboard'
+    ),
+
     # curadores não remunerados
     path(
         'curador/free/list',

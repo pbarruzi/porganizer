@@ -74,10 +74,12 @@ class AutomaticEmail(models.Model):
     # choices
     FORGOT_PASSWORD = 1
     CURADOR_HAS_NEW_CLIENT = 10
+    CURADOR_ENDED_SESSION = 20
 
     EMAIL_TYPE_CHOICES = (
         (FORGOT_PASSWORD, _('Nova Senha')),
         (CURADOR_HAS_NEW_CLIENT, _('Curador tem um novo Cliente')),
+        (CURADOR_ENDED_SESSION, _('Curador encerrou Atendimento ao Cliente')),
     )
 
     # campos

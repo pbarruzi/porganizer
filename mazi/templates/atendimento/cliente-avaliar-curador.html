@@ -1,0 +1,70 @@
+{% extends "core/base.html" %}
+{% load static widget_tweaks i18n %}
+{% load ratings %}
+{% block page-content %}
+{{ block.super }}
+<h1> {{ user.name }}</h1> 
+<h2>{% trans "Avaliar o Atendimento Recebido" %}</h2>
+<h3>{% trans "Curador: " %}<strong>{{object.curador}}</strong></h3>
+<div class="container">
+  <form method="POST"
+    {{csrf_token}}
+
+    <div class="row lista-passado">
+        <div class="col-lg-8 lista-passado">
+            <span> Data do agendamento: {{object.data_agendamento }} </span>
+            <br/>
+            <span> Data do encerramento: {{object.data_agendamento }} </span>
+
+            {% if object.depoimento_cliente %}
+              <br/><br/><br/>
+              <h4>Seu Depoimento</h4>
+              <div class="card">
+                <br/><br/><br/>
+                <div class="card-body">
+                  <blockquote class="blockquote blockquote-custom bg-white px-3 pt-4">
+                    <div class="blockquote-custom-icon bg-info shadow-1-strong">
+                      <i class="fa fa-quote-left text-white"></i>
+                    </div>
+                    <p class="mb-0 mt-2 font-italic">
+                        {{ object.depoimento_cliente }}
+                      <br/><br/>
+                      <a href="#" class="text-info">Revisar</a>."
+                    </p>
+                    <footer class="blockquote-footer pt-4 mt-4 border-top">
+                        {{ object.cliente }}
+                      <cite title="Source Title">{{ object.data_depoimento }}</cite>
+                    </footer>
+                  </blockquote>
+                </div>
+              </div>
+            {% endif %}
+            <br/>
+            <strong>Faça/Altere seu depoimento</strong>
+            </br>
+            {{form.depoimento_cliente}}
+
+           <button type="submit" name="save_button" id="save_button" class="btn btn-success ">
+              <span>
+                  <span>{% trans 'Salvar' %}</span>
+
+              </span>
+          </button>
+
+        </div>
+
+        <div class="col-lg-4">
+            <br>
+            Avaliar <strong>{{curador}}</strong> :</br>{% ratings  object.curador 15 15  %}
+            <br/><br/>
+            <p>
+              * Para Avaliar/Rever o atendimento, clique em uma das estrelas acima.
+              <br/>
+              Sua avaliacao atual é de <strong>{{object.avaliou_curador}} estrelas </strong>
+            </p>
+        </div>        
+
+    </div>
+  </form>
+</div>
+{% endblock page-content %}

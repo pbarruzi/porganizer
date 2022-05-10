@@ -8,6 +8,9 @@ from django.contrib.auth.models import (
 )
 from django.utils.translation import gettext_lazy as _
 from django.core import validators
+
+from django.contrib.contenttypes.fields import GenericRelation
+from star_ratings.models import Rating
 from core import models as core_models
 
 ADMINISTRADOR = 0  # Administrador do sistema. Admin
@@ -113,7 +116,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         _('Data de Registro'),
         auto_now_add=True
     )
-
+    ratings = GenericRelation(Rating, related_query_name='curadores')
     # o Django vai precisar das configurações abaixo em alguns momentos
     # um deles é na criação do superusuário. Estes são os campos que ele pede.
     USERNAME_FIELD = 'username'

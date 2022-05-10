@@ -1,14 +1,16 @@
+from datetime import datetime
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib import messages
 from django.views.generic import (View, TemplateView,)
+from django.views.generic.edit import (UpdateView)
 from django.db import transaction
 from django.urls import reverse_lazy
 
 
 from atendimento import models
-from atendimento.models import Atendimento, ABERTO, ENCERRADO
+from atendimento.models import ABERTO, ENCERRADO
 from account import models as account_models
-
+from atendimento.forms import AtendimentoAvalForm
 from curador import utils as curador_utils
 
 class AtendimentoDashboardView(TemplateView):
@@ -17,16 +19,6 @@ class AtendimentoDashboardView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-
-        # atendimentos_correntes = Atendimento.objects.filter(
-        #     cliente=user,
-        #     status_agendamento=ABERTO,
-        # ).order_by('curador')
-
-        # atendimentos_passados = Atendimento.objects.filter(
-        #     cliente=user,
-        #     status_agendamento=ENCERRADO,
-        # ).order_by('curador')
 
         remunerados = [ user for user in account_models.User.curadores.all() if user.curador_remunerado]
         nao_remunerados = [ user for user in account_models.User.curadores.all() if not user.curador_remunerado]
@@ -98,12 +90,12 @@ class ClienteDashboardView(TemplateView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
 
-        atendimentos_correntes = Atendimento.objects.filter(
+        atendimentos_correntes = models.Atendimento.objects.filter(
             cliente=user,
             status_agendamento=ABERTO,
         ).order_by('curador')
 
-        atendimentos_passados = Atendimento.objects.filter(
+        atendimentos_passados = models.Atendimento.objects.filter(
             cliente=user,
             status_agendamento=ENCERRADO,
         ).order_by('curador')
@@ -184,6 +176,34 @@ class ClienteContratarCuradorView(TemplateView):
         return HttpResponseRedirect(self.success_url)
 
 
+class ClienteAvaliarCuradorView(UpdateView):
+    template_name = 'atendimento/cliente-avaliar-curador.html'
+    success_url = reverse_lazy('agendamento:cliente-dashboard')
+    # form_class = AtendimentoAvalForm
+    model = models.Atendimento
+    fields = ['depoimento_cliente']
+
+    def form_valid(self, form):
+        form.instance.data_depoimento = datetime.now()
+        form.save()
+        return super().form_valid(form)
+        
+
+# curador
+class CuradorDashboardView(TemplateView):
+    template_name = 'atendimento/curador-dashboard.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+
+        atendimentos_correntes = models.Atendimento.objects.filter(
+            cliente=user,
+            status_agendamento=ABERTO,
+        ).order_by('curador')
+        context['atendimentos_correntes'] = atendimentos_correntes
+        return context
+ 
 # Json's
 
 class JasonContratarCuradorView(View):

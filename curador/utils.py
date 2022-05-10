@@ -37,3 +37,34 @@ def curador_has_new_cliente(curador, cliente):
     auto_email.send_email(
         assunto, corpo, corpo_html, settings.EMAIL_HOST_USER, curador.email
     )
+
+
+def curador_ended_session(curador, cliente):
+    """
+        Envia um e-mail para o cliente, logo após o curador 
+        encerrar
+
+    Args:
+        curador (_type_): account.User()
+        cliente (_type_): account.User()
+    
+    Tags: espera por duas tags, que caso existam, serão preenchidas:
+        . client_name:  Nome completo do cliente contratante
+        . curador_name: nome do Curador
+    """
+    auto_email = AutomaticEmail.objects \
+        .get(type=AutomaticEmail.CURADOR_ENDED_SESSION)
+
+    # formata email
+    
+    conteudo = {
+        'client_name': cliente.name,
+        'curador_name': curador.name,
+    }
+    assunto = auto_email.get_subject()
+    corpo = auto_email.get_formatted_text(conteudo)
+    corpo_html = auto_email.get_formatted_html(conteudo)
+
+    auto_email.send_email(
+        assunto, corpo, corpo_html, settings.EMAIL_HOST_USER, cliente.email
+    )

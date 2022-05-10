@@ -17,6 +17,9 @@ Template Name: Definicoes do template base para todo o projeto
         <meta name="description" content="Latest updates and statistic charts">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 
+        <link  href="{{STATIC_URL}}css/font-awesome/css/font-awesome.min.css" type="text/css">
+        <!--begin::Stars Rating -->
+        <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
         <!--begin::Web font -->
         <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
         <!-- Latest compiled and minified CSS -->
@@ -46,6 +49,25 @@ Template Name: Definicoes do template base para todo o projeto
             <link rel="shortcut icon" href="{% static 'media/img/favicon/favicon.ico' %}"/>
         {% endif %}
 
+        <style>
+            .blockquote-custom {
+                position: relative;
+                font-size: 1.3rem;
+                }
+                
+                .blockquote-custom-icon {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                top: -40px;
+                left: 19px;
+                }
+        </style>
+
     </head>
     <!-- end::Head -->
     
@@ -62,6 +84,7 @@ Template Name: Definicoes do template base para todo o projeto
     	{% endblock page-content %}
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.js' %}"></script>        
         {% block page-extra-scripts %}
             <!-- javascripts no fim do body -->
     	{% endblock page-extra-scripts %}
