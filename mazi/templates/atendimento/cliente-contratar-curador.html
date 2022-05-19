@@ -50,44 +50,41 @@
         <div class="depoimentos">
             <h3> {% trans 'Depoimentos' %} </h3>
             {% for depoimento in curador.consultas_curador.all %}
-                {% if depoimento.data_depoimento %}
-                    <strong> {{ depoimento.data_depoimento }} - {{ depoimento.cliente }}</strong> 
-                    ({{ depoimento.avaliacao_cliente }})
-                    </br>
+                {% if depoimento.is_depoimento_moderado %}
+                  {% if depoimento.data_depoimento %}
+                      <strong> {{ depoimento.data_depoimento }} - {{ depoimento.cliente }}</strong> 
+                      ({{ depoimento.avaliacao_cliente }})
+                      </br>
 
-
-                    <section class="vh-100" style="background-color: #e5d1c1;">
-                        <div class="container py-5 h-100">
-                          <div class="row d-flex justify-content-center align-items-center -h-100">
-                            <div class="col col-md-6 col-lg-6 col-xl-6">
-                      
-                              <div class="card">
-                                <div class="card-body">
-                                  <blockquote class="blockquote blockquote-custom bg-white px-3 pt-4">
-                                    <div class="blockquote-custom-icon bg-info shadow-1-strong">
-                                      <i class="fa fa-quote-left text-white"></i>
-                                    </div>
-                                    <p class="mb-0 mt-2 font-italic">
-                                        {{ depoimento.depoimento_cliente }}
-                                      <a href="#" class="text-info">@consequat</a>."
-                                    </p>
-                                    <footer class="blockquote-footer pt-4 mt-4 border-top">
-                                        {{ depoimento.cliente }}
-                                      <cite title="Source Title">{{ depoimento.data_depoimento }}</cite>
-                                    </footer>
-                                  </blockquote>
+                      <section class="vh-100" style="background-color: #e5d1c1;">
+                          <div class="container py-5 h-100">
+                            <div class="row d-flex justify-content-center align-items-center -h-100">
+                              <div class="col col-md-6 col-lg-6 col-xl-6">
+                        
+                                <div class="card">
+                                  <div class="card-body">
+                                    <blockquote class="blockquote blockquote-custom bg-white px-3 pt-4">
+                                      <div class="blockquote-custom-icon bg-info shadow-1-strong">
+                                        <i class="fa fa-quote-left text-white"></i>
+                                      </div>
+                                      <p class="mb-0 mt-2 font-italic">
+                                          {{ depoimento.depoimento_cliente }}
+                                        <a href="#" class="text-info">@consequat</a>."
+                                      </p>
+                                      <footer class="blockquote-footer pt-4 mt-4 border-top">
+                                          {{ depoimento.cliente }}
+                                        <cite title="Source Title">{{ depoimento.data_depoimento }}</cite>
+                                      </footer>
+                                    </blockquote>
+                                  </div>
                                 </div>
+                        
                               </div>
-                      
                             </div>
                           </div>
-                        </div>
-                      </section>
- 
-
-
-                    <em> {{ depoimento.depoimento_cliente }} </em>
-                    </br> </br>
+                        </section>
+                      </br> </br>
+                  {% endif %}
                 {% endif %}
             {% endfor depoimento %}
         </div>

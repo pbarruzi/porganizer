@@ -3,7 +3,6 @@ from django.utils.translation import gettext_lazy as _
 from account import models as models_account
 
 
-
 class Especialidade(models.Model):
     """
     Informações sobre especialidades que um curador pode atuar

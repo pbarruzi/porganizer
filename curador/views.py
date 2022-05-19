@@ -1,16 +1,17 @@
 from datetime import datetime
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-from django.views.generic import (View, ListView, TemplateView,)
+from django.views.generic import (View, ListView, TemplateView, FormView)
 from django.views.generic.edit import (UpdateView)
 from django.db import transaction
 from django.urls import reverse_lazy
 
 
+from curador import models
 from atendimento import models as atendimento_models
 from atendimento.models import ABERTO, ENCERRADO
 from account import models as account_models
-from curador.forms import EncerrarAtendimentoForm
+from curador.forms import EncerrarAtendimentoForm, AboutMeForm
 from curador import utils as curador_utils
 
 
@@ -71,66 +72,80 @@ class CuradorEncerrarAtendimentoView(UpdateView):
             
         return context
  
-
-class zCuradorEncerrarAtendimentoView(View):
-    template_name = 'curador/encerrar-atendimento.html'
-    success_url = reverse_lazy('curador:dashboard')
-    form_class = EncerrarAtendimentoForm
+        
+class CuradorHistoricoView(TemplateView):
+    template_name = 'curador/curador-historico.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        atendimento_id = kwargs.get('atendimento_id')
-        if atendimento_id:
-            atendimento = atendimento_models.Atendimento.objects\
-                .filter(pk=atendimento_id)\
-                .first()
-            context['atendimento'] = atendimento_id
-            
+
+        atendimentos_passados = atendimento_models.Atendimento.objects.filter(
+            curador=user,
+            status_agendamento=ENCERRADO,
+        ).order_by('curador')
+
+        context['atendimentos_passados'] = atendimentos_passados
         return context
 
-    @transaction.atomic
-    def post(self, request, *args, **kwargs):
+
+class CuradorAboutMeView(UpdateView):
+    template_name = 'curador/about-me.html'
+    success_url = reverse_lazy('curador:dashboard')
+    form_class = AboutMeForm
+    model = models.CuradorAboutMe
+
+    def get_object(self):
         user = self.request.user
-        atendimento_id = kwargs.get('atendimento_id')
+        about_me_obj = models.CuradorAboutMe\
+            .objects\
+            .filter(curador=user)\
+            .first()
+        if not about_me_obj:
+            about_me_obj = models.CuradorAboutMe()
+            about_me_obj.curador = user
+            about_me_obj.save()
         
-        if not atendimento_id:
-            msg = 'Atendimento não identificado (ID)'
-            messages.warning(self.request, msg)
-            return HttpResponseRedirect(self.success_url)
-    
-        contrato = atendimento_models.Atendimento.filter(pk=atendimento_id)
-        contrato.data_encerramento = datetime.now()
-        contrato.status_agendamento = ENCERRADO
-        try:
-            contrato.save()
-            msg = 'Contrato entre {} e você está encerrado!'\
-                .format(contrato.cliente)
-            messages.success(request, msg)
+        return about_me_obj
 
-            msg = 'Um email foi enviado ao cliente ( {} ), informando o novo status'\
-                .format(contrato.cliente.email)
-            messages.info(request, msg)
-            
-            curador_utils.curador_has_ended_session(user, contrato.cliente)
-            
-        except ValueError as e:
-            msg = 'Infelizmente algo saiu errado {}.\n\
-                Por favor informe nosso time, obrigado'.format(e)
-            messages.warning(request, msg)
-        
-        return HttpResponseRedirect(self.success_url)
-
-
-class CuradorPassadoListView(ListView):
-    template_name = 'atendimento/cliente-avaliar-curador.html'
-    success_url = reverse_lazy('agendamento:cliente-dashboard')
-    # form_class = AtendimentoAvalForm
-    model = atendimento_models.Atendimento
-    fields = ['depoimento_cliente']
 
     def form_valid(self, form):
-        form.instance.data_depoimento = datetime.now()
+        curador = self.request.user
+        form.instance.curador = curador
         form.save()
         return super().form_valid(form)
+
+
+class xCuradorAboutMeView(View):
+    template_name = 'curador/about-me.html'
+    success_url = reverse_lazy('curador:dashboard')
+    form_class = AboutMeForm
+    model = models.CuradorAboutMe
+    fields = ['anotacoes_curador']
+
+    def get_object(self):
+        user = self.request.user
+        about_me_obj = models.CuradorAboutMe\
+            .filter(curador=user)\
+            .first()
+        if not about_me_obj:
+            about_me_obj = models.CuradorAboutMe()
+            about_me_obj.curador = user
+            about_me_obj.save()
         
+        return about_me_obj
+            
+    def post(self, request, *args, **kwargs):
+        _post = super().post(request, *args, **kwargs)
+
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.instance.curador = self.request.user
+            form.save()
+        return _post
+
+    def xform_valid(self, form):
+        curador = self.request.user
+        form.instance.curador = curador
+        form.save()
+        return super().form_valid(form)

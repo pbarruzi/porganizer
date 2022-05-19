@@ -7,14 +7,23 @@
 
 <h3><strong>{% trans "Atendimentos em Aberto" %}</strong></h3>
 <div class="row lista-corrente">
-    {% for corrente in atendimentos_correntes %}
-        <div class="col-lg-8">
+    <div class="col-lg-9">
+        {% for corrente in atendimentos_correntes %}
             <h5><i class="fa fa-user"></i>*<strong>{{ corrente.cliente }}</strong></h5>
             <span> Data do agendamento: {{corrente.data_agendamento }} </span>
             <a href="{% url 'curador:encerrar-atendimento' corrente.pk %}">encerrar</a>
             <p>{{corrente.anotacoes_curador}}</p>
-        </div>
         </br>
-    {% endfor %}
+        {% endfor %}
+    </div>
+    <div class="col-lg-3">
+        <a href="{% url 'curador:historico' %}" type="button">
+            <h3> Ver meu Histórico de Atendimentos  </h3>
+        </a>
+        </br>
+        <a href="{% url 'curador:about-me' %}" type="button">
+            <h3> Editar Meu Perfil  </h3>
+        </a>
+    </div>
 </div>
 {% endblock page-content %}

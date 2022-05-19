@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% load static widget_tweaks %}
+
+<!-- 
+Template Name: Definicoes do template base para todo o projeto
+-->
+<html lang="pt_br">
+    <!-- begin::Head -->
+    <head>
+        <meta charset="utf-8" />
+
+         <title>
+            {% block title %} | &nbsp;{% if not IN_PRODUCTION %} (HOMOLOG) {% endif%} 
+            {% endblock %}
+        </title>
+
+        <meta name="description" content="Latest updates and statistic charts">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+
+        <link  href="{{STATIC_URL}}css/font-awesome/css/font-awesome.min.css" type="text/css">
+        <!--begin::Stars Rating -->
+        <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+        <!--begin::Web font -->
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script>
+            WebFont.load({
+            google: {"families":["Poppins:300,400,500,600,700","Roboto:300,400,500,600,700"]},
+            active: function() {
+                sessionStorage.fonts = true;
+            }
+          });
+        </script>
+        
+        {% block header-extra-js %}
+        
+        {% endblock header-extra-js %}
+        
+        {% if favicon_image %}
+            <link rel="shortcut icon" href="{{MEDIA_URL}}{{favicon_image}}"/>
+        {% else %}
+            <link rel="shortcut icon" href="{% static 'media/img/favicon/favicon.ico' %}"/>
+        {% endif %}
+
+        <style>
+            .blockquote-custom {
+                position: relative;
+                font-size: 1.3rem;
+                }
+                
+                .blockquote-custom-icon {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                top: -40px;
+                left: 19px;
+                }
+        </style>
+
+    </head>
+    <!-- end::Head -->
+    
+    <!-- begin::Body  -->
+    <body class="body">    
+        {% block page-content %}
+        {% for message in messages %}
+                <div class="alert {{ message.tags }}">
+                    <h3> {{ message }} </h3>
+                </div>
+            {% endfor %}
+
+        <!-- Conteúdo das páginas vão aqui -->
+    	{% endblock page-content %}
+        
+        <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.js' %}"></script>        
+        {% block page-extra-scripts %}
+            <!-- javascripts no fim do body -->
+    	{% endblock page-extra-scripts %}
+        <!--end::Page Scripts -->
+    </body>
+    <!-- end::Body -->
+</html>

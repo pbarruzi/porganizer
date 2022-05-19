@@ -1,0 +1,28 @@
+{% extends "core/base.html" %}
+{% load static widget_tweaks i18n %}
+{% load ratings %}
+{% block page-content %}
+{{ block.super }}
+<h1> {{ user.name }}</h1> 
+<h2>{% trans "Sobre você" %}</h2>
+<div class="container">
+  <form method="POST">
+  {% csrf_token %}
+
+    <div class="row lista-passado">
+        <div class="col-lg-8 lista-passado">
+            </br>
+
+            {{form.as_p}}
+            <button type="submit" name="save_button" id="save_button" class="btn btn-success ">
+              <span>
+                  <span>{% trans 'Salvar meu Perfil' %}</span>
+
+              </span>
+            </button>
+
+        </div>
+    </div>
+  </form>
+</div>
+{% endblock page-content %}

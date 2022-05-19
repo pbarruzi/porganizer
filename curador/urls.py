@@ -19,5 +19,16 @@ urlpatterns = [
         views.CuradorEncerrarAtendimentoView.as_view(),
         name='encerrar-atendimento'
     ),
+        path(
+        'curador/historico/',
+        views.CuradorHistoricoView.as_view(),
+        name='historico'
+    ),
+
+        path(
+        'curador/about-me/',
+        views.CuradorAboutMeView.as_view(),
+        name='about-me'
+    ),
 
 ]

@@ -1,0 +1,50 @@
+{% extends "core/base.html" %}
+{% load static widget_tweaks i18n %}
+{% load ratings %}
+{% block page-content %}
+{{ block.super }}
+<h1> {{ user.name }}</h1> {{ user.pk}}
+
+<h3><strong>{% trans "Histórico de Atendimentos" %}</strong></h3>
+<div class="row lista-corrente">
+    <div class="col-lg-9">
+        {% for passado in atendimentos_passados %}
+            <h5><i class="fa fa-user"></i>*<strong>{{ passado.cliente }}</strong></h5>
+            <span> Data do agendamento: {{passado.data_agendamento }} </span>
+            <h4> Minhas observações neste Atendimento </h4>
+                {% if passado.anotacoes_curador %}
+                    <p>{{passado.anotacoes_curador}}</p>
+                {% else %}
+                    <p> * Não há anotações aqui </p>
+                {% endif %}
+            </br>
+            <h4> Depoimento do Cliente </h4>
+                {% if passado.depoimento_cliente %}
+                    <br/>
+                    <div class="card">
+                    <br/><br/>
+                    <div class="card-body">
+                        <blockquote class="blockquote blockquote-custom bg-white px-3 pt-4">
+                        <div class="blockquote-custom-icon bg-info shadow-1-strong">
+                            <i class="fa fa-quote-left text-white"></i>
+                        </div>
+                        <p class="mb-0 mt-2 font-italic">
+                            {{ passado.depoimento_cliente }}
+                            <br/><br/>
+                        </p>
+                        <footer class="blockquote-footer pt-4 mt-4 border-top">
+                            {{ passado.cliente }}
+                            <cite title="Source Title">{{ passado.data_depoimento }}</cite>
+                        </footer>
+                        </blockquote>
+                    </div>
+                    </div>
+                {% else %}
+                    <p> * Não há depoimento aqui </p>
+                    <a href="#"> Solicitar depoimento para o Cliente </p> 
+                {% endif %}
+        </br>
+        {% endfor %}
+    </div>
+</div>
+{% endblock page-content %}

@@ -54,6 +54,11 @@ class Atendimento(models.Model):
         null=True,
         blank=True,
     )
+    is_depoimento_moderado = models.BooleanField(
+        verbose_name=_('Depoimento está moderado?'),
+        blank=True,
+        default=False,
+    )
     data_depoimento = models.DateField(
         verbose_name=_('Data do Depoimento'),
         help_text=_('(DD/MM/AAAA)'),
