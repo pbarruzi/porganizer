@@ -3,68 +3,237 @@
 {% load ratings %}
 {% block page-content %}
 {{ block.super }}
-<h1> {{ user.name }}</h1> {{ user.pk}}
-<h2>{% trans "Histórico dos seus Atendimentos" %}</h2>
-<h3><strong>{% trans "Atendimentos já encerrados" %}</strong></h3>
 
-<div class="row lista-passado">
-    <div class="col-lg-12 lista-passado">
-        {% for passado in atendimentos_passados %}
-            <div class="col-lg-6">
-                <h5><strong>{{ passado.curador }}</strong></h5>
-                <span> Data do agendamento: {{passado.data_agendamento }} </span>
-                <br/>
-                <span> Data do encerramento: {{passado.data_agendamento }} </span>
-            </div>
-            <div class="col-lg-6">
-                <br>
-                Avaliações de <strong>{{passado.curador}}</strong> :</br>{% ratings  passado.curador 18 18 'read_only' %}
-                <br/><br/>
-                Seu depoimento:
-                <br/>
-                <br/>
-                <br/>
-                
-                <div class="card">
-                  <div class="card-body">
-                    <blockquote class="blockquote blockquote-custom bg-white px-3 pt-4">
-                      <div class="blockquote-custom-icon bg-info shadow-1-strong">
-                        <i class="fa fa-quote-left text-white"></i>
-                      </div>
-                      <p class="mb-0 mt-2 font-italic">
-                        {{ passado.depoimento_cliente }}
-                      </p>
-                      <footer class="blockquote-footer pt-4 mt-4 border-top">
-                        {{ passado.cliente }}
-                        <cite title="Source Title">{{ passado.data_depoimento }}</cite>
-                      </footer>
-                    </blockquote>
+<div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+  <!--begin::Col-->
+  <div class="col-xxl-12">
+      <!--begin::Card widget 18-->
+      <div class="card card-flush border-0 h-md-100">
+          <!--begin::Body-->
+          <div class="card-body py-9">
+              <!--begin::Row-->
+              <div class="row gx-9 h-100">
+                  <!--begin::Col-->
+                  <div class="col-sm-6 mb-10 mb-sm-0">
+                      <!--begin::Image-->
+                      <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-400px min-h-sm-100 h-100" style="background-image:url('{% static "metronic/media/stock/600x600/img-45.jpg" %}');"></div>
+                      <!--end::Image-->
                   </div>
-                </div>
-                
-                <a href="{% url 'agendamento:cliente-avaliar-curador' passado.pk%}"> Avaliar/Revisar </a>
-                
+                  <!--end::Col-->
+                  <!--begin::Col-->
+                  <div class="col-sm-6">
+                      <!--begin::Wrapper-->
+                      <div class="d-flex flex-column h-100">
+
+                          <div class="col-xl-6">
+                              <!--begin::Engage widget 1-->
+                              <div class="card h-xl-100">
+                                  <!--begin::Body-->
+                                  <div class="card-body d-flex flex-column flex-center">
+                                      <!--begin::Heading-->
+                                      <div class="mb-2">
+                                          <!--begin::Title-->
+                                          <h1 class=" text-gray-800 text-center lh-lg fw-boldest">{{user.name}}
+                                          <span class="fw-bold">, juntos desde {{user.date_joined}}.</span></h1>
+                                          <br>
+                                          
+                                          <!--end::Title-->
+                                          <!--begin::Illustration-->
+                                          <div class="flex-grow-1 bgi-no-repeat bgi-size-contain bgi-position-x-center card-rounded-bottom h-150px mh-150px my-5 my-lg-12" style="background-image:url('{% static "metronic/media/svg/illustrations/easy/2.svg" %}')"></div>
+                                          <!--end::Illustration-->
+                                          <br>
+                                          <h1 class="fw-bold text-gray-800 text-center lh-lg">{{user.email}}</h1>
+
+                                      </div>
+                                      <!--end::Heading-->
+                                  </div>
+                                  <!--end::Body-->
+                              </div>
+                              <!--end::Engage widget 1-->
+                          </div>
+
+                      </div>
+                      <!--end::Wrapper-->
+                  </div>
+                  <!--end::Col-->
               </div>
-            </br>
+              <!--end::Row-->
+          </div>
+          <!--end::Body-->
+      </div>
+      <!--end::Card widget 18-->
+  </div>
+  <!--end::Col-->
+  <!--begin::Col-->
+  <div class="row g-5 g-xl-12">
+      <!--begin::Col-->
+      <div class="col-xl-4">
+        <!--begin::Mixed Widget 8-->
+        <div class="card card-xl-stretch mb-xl-12">
+          <!--begin::Body-->
+          <div class="card-body">
+            <!--begin::Heading-->
+            <div class="d-flex flex-stack">
+              <!--begin:Info-->
+              <div class="d-flex align-items-center">
+                <!--begin:Image-->
+                <div class="symbol symbol-60px me-5">
+                  <span class="symbol-label bg-danger-light">
+                    <img src="{% static 'metronic/media/svg/shapes/abstract-8.svg' %}" class="h-50 align-self-center" alt="">
+                  </span>
+                </div>
+                <!--end:Image-->
+                <!--begin:Title-->
+                <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
+                  <a href="#" class="text-dark fw-bolder text-hover-primary fs-3">Atendimentos em Aberto</a>
+                </div>
+                <!--end:Title-->
+              </div>
+              <!--begin:Info-->
+            </div>
+            <!--end::Heading-->
+            {% for corrente in atendimentos_correntes %}
+
+                <div class="card-body d-flex flex-center flex-column pt-12 p-9">
+                  <!--begin::Avatar-->
+                  <div class="symbol symbol-65px symbol-circle mb-5">
+                    <span class="symbol-label fs-2x fw-bold text-primary bg-light-primary">{{ corrente.curador.name|make_list|slice:':2'|join:''}}</span>
+                    <div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>
+                  </div>
+                  <!--end::Avatar-->
+                  <!--begin::Name-->
+                  <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">{{corrente.curador.name}}</a>
+                  <!--end::Name-->
+                  <!--begin::Position-->
+                  <div class="fw-bold text-gray-400 mb-6">{{corrente.curador.email}}</div>
+                  <!--end::Position-->
+                  <!--begin::Info-->
+                  <div class="d-flex flex-center flex-wrap">
+                    <!--begin::Stats-->
+                    <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
+                      <div class="fs-6 fw-bolder text-gray-700">{{corrente.data_agendamento }}</div>
+                      <div class="fw-bold text-gray-400">Iníciou em</div>
+                    </div>
+                    <!--end::Stats-->
+                    <!--begin::Stats-->
+                    <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
+                      <div class="fs-6 fw-bolder text-gray-700">{% ratings  corrente.curador 18 18 'read_only' %}
+                      </div>
+                      <div class="fw-bold text-gray-400">Avaliações deste curador</div>
+                    </div>
+                    <!--end::Stats-->
+                  </div>
+                  <!--end::Info-->
+                </div>
+            {% endfor atendimentos_correntes %}
+          </div>
+          <!--end::Body-->
+        </div>
+        <!--end::Mixed Widget 8-->
+      </div>
+      <!--end::Col-->
+
+      <!--begin::Col-->
+      <div class="col-xl-8">
+        <!--begin::Mixed Widget 8-->
+        <div class="card card-xl-stretch mb-xl-12">
+          <!--begin::Body-->
+          <div class="card-body">
+            <!--begin::Heading-->
+            <div class="d-flex flex-stack">
+              <!--begin:Info-->
+              <div class="d-flex align-items-center">
+                <!--begin:Image-->
+                <div class="symbol symbol-60px me-5">
+                  <span class="symbol-label bg-danger-light">
+                    <img src="{% static 'metronic/media/svg/shapes/abstract-1-dark.svg' %}" class="h-50 align-self-center" alt="">
+                  </span>
+                </div>
+                <!--end:Image-->
+                <!--begin:Title-->
+                <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
+                  <a href="#" class="text-dark fw-bolder text-hover-primary fs-3">Atendimentos Encerrados</a>
+                </div>
+                <!--end:Title-->
+              </div>
+              <!--begin:Info-->
+            </div>
+            <!--end::Heading-->
+            {% for passado in atendimentos_passados %}
             
-        </br>
-        {% endfor %}
+                <div class="card-body d-flex flex-center flex-column pt-12 p-9">
+                  <!--begin::Avatar-->
+                  <div class="symbol symbol-65px symbol-circle mb-5">
+                    <span class="symbol-label fs-2x fw-bold text-primary bg-light-primary">{{ passado.curador.name|make_list|slice:':2'|join:''}}</span>
+                    <div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>
+                  </div>
+                  <!--end::Avatar-->
+                  <!--begin::Name-->
+                  <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-0">{{passado.curador.name}}</a>
+                  <!--end::Name-->
+                  <!--begin::Position-->
+                  <div class="fw-bold text-gray-400 mb-6">{{passado.curador.email}}</div>
+                  <!--end::Position-->
+                  <!--begin::Info-->
+                  <div class="d-flex flex-center flex-wrap">
+                    <!--begin::Stats-->
+                    <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
+                      <div class="fs-6 fw-bolder text-gray-700">{{passado.data_agendamento }}</div>
+                      <div class="fw-bold text-gray-400">Iniciou em</div>
+                      <div class="fs-6 fw-bolder text-gray-700">{{passado.data_agendamento }}</div>
+                      <div class="fw-bold text-gray-400">Encerrou em</div>
+
+                    </div>
+                    <!--end::Stats-->
+                    <!--begin::Stats-->
+                    <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
+                      <div class="fs-6 fw-bolder text-gray-700">{% ratings  passado.curador 18 18 'read_only' %}
+                      </div>
+                      <div class="fw-bold text-gray-400">Avaliações deste curador</div>
+                    </div>
+                    <!--end::Stats-->
+
+                  </div>
+                  <!--end::Info-->
+
+                  <br>
+                  <h4 class="fw-bold text-gray-700">Seu depoimento</h4>
+
+                  {% if passado.data_depoimento %}
+        
+                  <div class="d-flex align-items-center border-1 border-dashed card-rounded p-5 p-lg-10 mb-14">
+                    <!--begin::Text-->
+                    <div class="mb-0 fs-6">
+                      <div class="text-muted fw-bold lh-lg mb-2">
+                        {{ passado.depoimento_cliente }}
+                      </div>
+
+                      <!--begin::Info-->
+                      <div class="p-2">
+                        -<a href="#" class="text-gray-700 fw-bolder text-hover-primary">{{passado.cliente.name}}</a>
+                        <span class="text-gray-400 fs-7 fw-bold d-block mt-1">{{passado.data_depoimento}}</span>
+                      </div>
+                      <!--end::Info-->
+
+                    </div>
+                    <!--end::Text-->
+                    
+                  </div>
+                  <a href="{% url 'agendamento:cliente-avaliar-curador' passado.pk%}"> Quero Revisar minha Avaliação / Depoimento</a>
+                {% endif %}
+
+
+
+                </div>
+            {% endfor atendimentos_passados %}
+          </div>
+          <!--end::Body-->
+        </div>
+        <!--end::Mixed Widget 8-->
+      </div>
+      <!--end::Col-->
+
     </div>
 </div>
-<h3><strong>{% trans "Atendimentos Correntes" %}</strong></h3>
-<div class="row lista-corrente">
-    {% for corrente in atendimentos_correntes %}
-    <div class="col-lg-4">
-        <h5><strong>{{ corrente.curador }}</strong></h5>
-        <span> Data do agendamento: {{corrente.data_agendamento }} </span>
-    </div>
-    <div class="">
-        <br>
-        Avaliaçoes de <strong>{{corrente.curador}}</strong> :</br>{% ratings  corrente.curador 18 18 'read_only' %}
-    </div>
-    </br>
-{% endfor %}
-</div>
-</div>
+
 {% endblock page-content %}
-<div

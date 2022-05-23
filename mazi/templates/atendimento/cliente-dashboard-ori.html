@@ -1,0 +1,70 @@
+{% extends "core/base.html" %}
+{% load static widget_tweaks i18n %}
+{% load ratings %}
+{% block page-content %}
+{{ block.super }}
+<h1> {{ user.name }}</h1> {{ user.pk}}
+<h2>{% trans "Histórico dos seus Atendimentos" %}</h2>
+<h3><strong>{% trans "Atendimentos já encerrados" %}</strong></h3>
+
+<div class="row lista-passado">
+    <div class="col-lg-12 lista-passado">
+        {% for passado in atendimentos_passados %}
+            <div class="col-lg-6">
+                <h5><strong>{{ passado.curador }}</strong></h5>
+                <span> Data do agendamento: {{passado.data_agendamento }} </span>
+                <br/>
+                <span> Data do encerramento: {{passado.data_agendamento }} </span>
+            </div>
+            <div class="col-lg-6">
+                <br>
+                Avaliações de <strong>{{passado.curador}}</strong> :</br>{% ratings  passado.curador 18 18 'read_only' %}
+                <br/><br/>
+                Seu depoimento:
+                <br/>
+                <br/>
+                <br/>
+                
+                <div class="card">
+                  <div class="card-body">
+                    <blockquote class="blockquote blockquote-custom bg-white px-3 pt-4">
+                      <div class="blockquote-custom-icon bg-info shadow-1-strong">
+                        <i class="fa fa-quote-left text-white"></i>
+                      </div>
+                      <p class="mb-0 mt-2 font-italic">
+                        {{ passado.depoimento_cliente }}
+                      </p>
+                      <footer class="blockquote-footer pt-4 mt-4 border-top">
+                        {{ passado.cliente }}
+                        <cite title="Source Title">{{ passado.data_depoimento }}</cite>
+                      </footer>
+                    </blockquote>
+                  </div>
+                </div>
+                
+                <a href="{% url 'agendamento:cliente-avaliar-curador' passado.pk%}"> Avaliar/Revisar </a>
+                
+              </div>
+            </br>
+            
+        </br>
+        {% endfor %}
+    </div>
+</div>
+<h3><strong>{% trans "Atendimentos Correntes" %}</strong></h3>
+<div class="row lista-corrente">
+    {% for corrente in atendimentos_correntes %}
+    <div class="col-lg-4">
+        <h5><strong>{{ corrente.curador }}</strong></h5>
+        <span> Data do agendamento: {{corrente.data_agendamento }} </span>
+    </div>
+    <div class="">
+        <br>
+        Avaliaçoes de <strong>{{corrente.curador}}</strong> :</br>{% ratings  corrente.curador 18 18 'read_only' %}
+    </div>
+    </br>
+{% endfor %}
+</div>
+</div>
+{% endblock page-content %}
+<div
