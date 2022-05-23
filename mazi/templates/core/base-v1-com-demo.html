@@ -2913,9 +2913,9 @@ License: For each use you must have a valid license purchased only from above li
 													<!--end::Avatar-->
 													<!--begin::Username-->
 													<div class="d-flex flex-column">
-														<div class="fw-bolder d-flex align-items-center fs-5">{{user.name}}
-														<span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">On</span></div>
-														<a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{user.email}}</a>
+														<div class="fw-bolder d-flex align-items-center fs-5">Max Smith
+														<span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span></div>
+														<a href="#" class="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
 													</div>
 													<!--end::Username-->
 												</div>
@@ -4194,7 +4194,7 @@ License: For each use you must have a valid license purchased only from above li
 							</div>
 							<!--end::License-->
 							<!--begin::Purchase-->
-							<a href="{% url 'agendamento:curador-remunerado-list' %}" class="btn btn-primary mb-15 w-100">Contratar</a>
+							<a href="https://1.envato.market/EA4JP" class="btn btn-primary mb-15 w-100">Buy Now</a>
 							<!--end::Purchase-->
 							<!--begin::Demos-->
 							<div class="mb-0">
@@ -4796,17 +4796,16 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Engage drawers-->
 		<!--begin::Engage toolbar-->
 		<div class="engage-toolbar d-flex position-fixed px-5 fw-bolder zindex-2 top-50 end-0 transform-90 mt-20 gap-2">
+			<!--begin::Demos drawer toggle-->
+			<button id="kt_engage_demos_toggle" class="engage-demos-toggle btn btn-flex h-35px bg-body btn-color-gray-700 btn-active-color-gray-900 shadow-sm fs-6 px-4 rounded-top-0" title="Check out 22 more demos" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-dismiss="click" data-bs-trigger="hover">
+				<span id="kt_engage_demos_label">Demos</span>
+			</button>
+			<!--end::Demos drawer toggle-->
+			<!--begin::Help drawer toggle-->
+			<button id="kt_help_toggle" class="engage-help-toggle btn btn-flex h-35px bg-body btn-color-gray-700 btn-active-color-gray-900 shadow-sm px-5 rounded-top-0" title="Learn &amp; Get Inspired" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-dismiss="click" data-bs-trigger="hover">Help</button>
+			<!--end::Help drawer toggle-->
 			<!--begin::Purchase link-->
-			<a href="{% url 'agendamento:cliente-dashboard' %}"  class="engage-purchase-link btn btn-color-gray-700 bg-body btn-active-color-gray-900' btn-flex h-35px px-5 shadow-sm rounded-top-0" title="Quero ir para minha Área" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-dismiss="click" data-bs-trigger="hover"> Home </a>
-			<!--end::Purchase link-->
-
-
-			<!--begin::Purchase link-->
-			<a href="{% url 'agendamento:curador-free-list' %}"  class="engage-purchase-link btn btn-color-gray-700 bg-body btn-active-color-gray-900' btn-flex h-35px px-5 shadow-sm rounded-top-0" title="Curadores atendendo gratuitamente" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-dismiss="click" data-bs-trigger="hover"> For Free </a>
-			<!--end::Purchase link-->
-
-			<!--begin::Purchase link-->
-			<a href="{% url 'agendamento:curador-remunerado-list' %}"  class="engage-purchase-link btn btn-color-gray-700 bg-body btn-active-color-gray-900' btn-flex h-35px px-5 shadow-sm rounded-top-0" title="Contratar o serviço de um Curador" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-dismiss="click" data-bs-trigger="hover"> Contratar </a>
+			<a href="https://1.envato.market/EA4JP" target="_blank" class="engage-purchase-link btn btn-color-gray-700 bg-body btn-active-color-gray-900' btn-flex h-35px px-5 shadow-sm rounded-top-0">Buy now</a>
 			<!--end::Purchase link-->
 		</div>
 		<!--end::Engage toolbar-->

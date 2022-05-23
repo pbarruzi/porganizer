@@ -2,7 +2,6 @@
 {% load static widget_tweaks i18n %}
 {% block page-content %}
         {{ block.super }}
-        <h2>Olá {{ user.name }}</h2>
         <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
             <!--begin::Col-->
             <div class="col-xxl-12">
@@ -48,10 +47,10 @@
                                                 <!--begin::Links-->
                                                 <div class="text-center mb-1">
                                                     <!--begin::Link-->
-                                                    <a class="btn btn-sm btn-primary me-2" data-bs-target="#kt_modal_new_card" data-bs-toggle="modal">for Free</a>
+                                                    <a class="btn btn-sm btn-primary me-2" href="{% url 'agendamento:curador-free-list' %}">For Free</a>
                                                     <!--end::Link-->
                                                     <!--begin::Link-->
-                                                    <a class="btn btn-sm btn-light" href="../../demo12/dist/pages/user-profile/followers.html">Por Contrato</a>
+                                                    <a class="btn btn-sm btn-light" href="{% url 'agendamento:curador-remunerado-list' %}">Por Contrato</a>
                                                     <!--end::Link-->
                                                 </div>
                                                 <!--end::Links-->
@@ -146,8 +145,8 @@
                                 <!--end::Items-->
                                 <!--begin::Action-->
                                 <div class="d-flex flex-column flex-sm-row d-grid gap-2">
-                                    <a href="#" class="btn btn-success flex-shrink-0 me-2" data-bs-toggle="modal" data-bs-target="#kt_modal_upgrade_plan">Contrate um Curador</a>
-                                    <a href="#" class="btn btn-primary flex-shrink-0" style="background: rgba(255, 255, 255, 0.2)" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Busque atendimento gratuíto</a>
+                                    <a href="{% url 'agendamento:curador-remunerado-list' %}" class="btn btn-success flex-shrink-0 me-2" >Contrate um Curador</a>
+                                    <a href="{% url 'agendamento:curador-free-list' %}" class="btn btn-primary flex-shrink-0" style="background: rgba(255, 255, 255, 0.2)">Busque atendimento gratuíto</a>
                                 </div>
                                 <!--end::Action-->
                             </div>
@@ -169,29 +168,128 @@
             <!--end::Col-->
         </div>
 
-        <div class="row">
-            <div class="col-lg-4 lista-curadores">
-                <h2>{% trans "Lista dos nossos Curadores Remunerados" %}</h2>
-                    <a class="btn"
-                        href="{% url 'agendamento:curador-remunerado-list' %}">
-                        <h3>{% trans 'Conhecer nossos curadores ' %}</h3>
-                    </a>
+        <!--begin::Videos-->
+        <div class="mb-17">
+            <!--begin::Content-->
+            <div class="d-flex flex-stack mb-5">
+                <!--begin::Title-->
+                <h3 class="text-dark">Videos Tutoriais</h3>
+                <!--end::Title-->
             </div>
-
-            <div class="col-lg-4 lista-curadores">
-                <h2>{% trans "Lista dos nossos Curadores atendendo Gratuitamente" %}</h2>
-                <a class="btn"
-                    href="{% url 'agendamento:curador-free-list' %}">
-                    <h3>{% trans 'Conhecer nossos curadores ' %}</h3>
-                </a>
+            <!--end::Content-->
+            <!--begin::Separator-->
+            <div class="separator separator-dashed mb-9"></div>
+            <!--end::Separator-->
+            <!--begin::Row-->
+            <div class="row g-10">
+                <!--begin::Col-->
+                <div class="col-md-4">
+                    <!--begin::Feature post-->
+                    <div class="card-xl-stretch me-md-6">
+                        <!--begin::Image-->
+                        <a class="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style="background-image:url('{% static "metronic/media/stock/600x400/img-73.jpg" %}')" data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/btornGtLwIo">
+                            <img src="{% static 'metronic/media/svg/misc/video-play.svg' %}" class="position-absolute top-50 start-50 translate-middle" alt="">
+                        </a>
+                        <!--end::Image-->
+                        <!--begin::Body-->
+                        <div class="m-0">
+                            <!--begin::Title-->
+                            <a class="fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base" data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/btornGtLwIo">Numerologia</a>
+                            <!--end::Title-->
+                            <!--begin::Text-->
+                            <div class="fw-bold fs-5 text-gray-600 text-dark my-4">Descubra seu Potencial, Dons e Talentos inatos através da Numerologa</div>
+                            <!--end::Text-->
+                            <!--begin::Content-->
+                            <div class="fs-6 fw-bolder">
+                                <!--begin::Author-->
+                                <a href="../../demo12/dist/pages/user-profile/overview.html" class="text-gray-700 text-hover-primary">Tassi</a>
+                                <!--end::Author-->
+                                <!--begin::Date-->
+                                <span class="text-muted">on Mar 21 2021</span>
+                                <!--end::Date-->
+                            </div>
+                            <!--end::Content-->
+                        </div>
+                        <!--end::Body-->
+                    </div>
+                    <!--end::Feature post-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-4">
+                    <!--begin::Feature post-->
+                    <div class="card-xl-stretch mx-md-3">
+                        <!--begin::Image-->
+                        <a class="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style="background-image:url('{% static "metronic/media/stock/600x400/img-74.jpg" %}')" data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/btornGtLwIo">
+                            <img src="{% static 'metronic/media/svg/misc/video-play.svg' %}" class="position-absolute top-50 start-50 translate-middle" alt="">
+                        </a>
+                        <!--end::Image-->
+                        <!--begin::Body-->
+                        <div class="m-0">
+                            <!--begin::Title-->
+                            <a data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/btornGtLwIo" class="fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base">Numerologia Empresarial</a>
+                            <!--end::Title-->
+                            <!--begin::Text-->
+                            <div class="fw-bold fs-5 text-gray-600 text-dark my-4">Um dos usos da Numerologia que mais cresce é sua aplicação para encontrar o nome apropriado para empresas ou produtos que as pessoas almejam criar. Por mais que a Numerologia empresarial  seja um estudo complexo, é possível aprender algumas dicas que devem ser levadas em conta nesta decisão.</div>
+                            <!--end::Text-->
+                            <!--begin::Content-->
+                            <div class="fs-6 fw-bolder">
+                                <!--begin::Author-->
+                                <a href="../../demo12/dist/pages/user-profile/overview.html" class="text-gray-700 text-hover-primary">Tassi e Edu Oliva</a>
+                                <!--end::Author-->
+                                <!--begin::Date-->
+                                <span class="text-muted">on Apr 14 2021</span>
+                                <!--end::Date-->
+                            </div>
+                            <!--end::Content-->
+                        </div>
+                        <!--end::Body-->
+                    </div>
+                    <!--end::Feature post-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-4">
+                    <!--begin::Feature post-->
+                    <div class="card-xl-stretch ms-md-6">
+                        <!--begin::Image-->
+                        <a class="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style="background-image:url('{% static "metronic/media/stock/600x400/img-47.jpg" %}')" data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/TWdDZYNqlg4">
+                            <img src="{% static 'metronic/media/svg/misc/video-play.svg' %}" class="position-absolute top-50 start-50 translate-middle" alt="">
+                        </a>
+                        <!--end::Image-->
+                        <!--begin::Body-->
+                        <div class="m-0">
+                            <!--begin::Title-->
+                            <a data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/TWdDZYNqlg4" class="fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base">Forças de Carater</a>
+                            <!--end::Title-->
+                            <!--begin::Text-->
+                            <div class="fw-bold fs-5 text-gray-600 text-dark my-4">As Forças de Caráter são as partes positivas de sua personalidade que afetam como você pensa, sente e se comporta. Os cientistas da Psicologia Positiva identificaram 6 Virtudes e 24 Forças de Caráter que você tem a capacidade de expressar.</div>
+                            <!--end::Text-->
+                            <!--begin::Content-->
+                            <div class="fs-6 fw-bolder">
+                                <!--begin::Author-->
+                                <a href="../../demo12/dist/pages/user-profile/overview.html" class="text-gray-700 text-hover-primary">Edu Oliva</a>
+                                <!--end::Author-->
+                                <!--begin::Date-->
+                                <span class="text-muted">on May 14 2021</span>
+                                <!--end::Date-->
+                            </div>
+                            <!--end::Content-->
+                        </div>
+                        <!--end::Body-->
+                    </div>
+                    <!--end::Feature post-->
+                </div>
+                <!--end::Col-->
             </div>
-
-            <div class="col-lg-4 lista-curadores">
-                <h2>{% trans "Visitar sua Área de Usuário" %}</h2>
-                <a class="btn"
-                    href="{% url 'agendamento:cliente-dashboard' %}">
-                    <h3>{% trans 'Visitar minha Área' %}</h3>
-                </a>
-            </div>
+            <!--end::Row-->
+            <!--begin::Separator-->
+            <br>
+            <div class="separator separator-dashed mb-9"></div>
+            <!--end::Separator-->
+            
         </div>
+        <!--end::Videos-->
+
+
   {% endblock page-content %}

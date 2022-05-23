@@ -1,145 +1,300 @@
 {% extends "core/base.html" %}
 {% load static widget_tweaks i18n %}
+{% load ratings %}
 {% block page-content %}
     {{ block.super }}
-    <h1> Olá {{ user.name }}, </h1>
-    <h2> {% trans "Você está prestes a contratar um atendimento" %}  </h2>
-    <h3>{% trans 'Veja algumas coisas sobre ' %} {{ curador }} </h3>
-    </br>
-    {% blocktrans with qt_atendimentos=curador.curador_estatisticas.qt nt_media=curador.curador_estatisticas.media %}
-        Já realizou {{ qt_atendimentos }} atendimentos. </br>
-        Tem uma nota média de {{nt_media}} nos atendimentos. </br>
-    {% endblocktrans %}        
-    <h3> Suas Especialidades são:</h3>
-    <div class="col-4 lista-especialidades">
-        {% for especialidade in curador.curador_especialidades.all %}
-            <em>--> {{ especialidade.especialidade.titulo }}</em>
-            </br>
-        {% endfor %}
-    </div>
-    </br>
-    <div class="container">
-        <ul class="list-inline">
-            <li class="list-inline-item">
-                 <form method="post">
-                    {% csrf_token %}
-                    <ul class="list-inline">
 
-                        <li class="list-inline-item"> <strong class="text-muted">{% trans '' %}</strong></li>
-                        <li class="list-inline-item"> 
-                            <div class="spinner-border text-primary" role="status" id="curador_spinner">
-                                <span class="sr-only">Aguarde...</span>
-                              </div>
-                        </li>
+<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+						<!--begin::Post-->
+						<div class="content flex-row-fluid" id="kt_content">
+							<!--begin::Post card-->
+							<div class="card">
+								<!--begin::Body-->
+								<div class="card-body p-lg-20 pb-lg-0">
+									<!--begin::Layout-->
+									<div class="d-flex flex-column flex-xl-row">
+										<!--begin::Content-->
+										<div class="flex-lg-row-fluid me-xl-15">
+											<!--begin::Post content-->
+											<div class="mb-17">
+												<!--begin::Wrapper-->
+												<div class="mb-8">
+													<!--begin::Title-->
+													<a href="#" class="text-dark text-hover-primary fs-2 fw-bolder">Olá {{user.name}}, eu sou {{curador}} <br> Minha missão é ajudar você a conseguir a sua melhor versão.
+													<span class="fw-bolder text-muted fs-5 ps-1">10/03/2022</span></a>
+													<!--end::Title-->
+													<!--begin::Container-->
+													<div class="overlay mt-8">
+														<!--begin::Image-->
+														<div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-350px" style="background-image:url('{% static "metronic/media/stock/1600x800/img-1.jpg" %}')"></div>
+														<!--end::Image-->
+														<!--begin::Links-->
+														<div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                              <form method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">Contratar</button>
+                              </form>
+														</div>
+														<!--end::Links-->
+													</div>
+													<!--end::Container-->
+												</div>
+												<!--end::Wrapper-->
+												<!--begin::Description-->
+												<div class="fs-5 fw-bold text-gray-600">
+													<!--begin::Text 1-->
+													<p class="mb-8">{{user.name}}, Você parece atrair o mesmo problema repetidamente ou é continuamente desafiado em uma área de sua vida? Você sabe do que é capaz, mas algo o impede? Você já se perguntou por que alguns indivíduos têm problemas de saúde, pobreza ou relacionamentos tóxicos enquanto outros não?</p>
+													<!--end::Text-->
+													<!--begin::Text 2-->
+													<p class="mb-8">Por mais estranho que possa parecer, as respostas a essas e outras perguntas podem ser obtidas usando a numerologia; calculando as letras do seu nome e números de seu aniversário,
+													<span class="text-gray-800 pe-1">“Não importa se você nunca tenha ouvido falas,”</span>simplesmente sigamos juntos nesta caminhada.</p>
+													<!--end::Text 2-->
+													<!--begin::Text 3-->
+													<p class="mb-8">A numerologia indica a idade da sua alma e melhora sua autoconsciência, expondo não apenas como você se expressa, mas também onde você gera sua energia inata. Saiba como esta ciência pode te ajudar a entender sua missão de vida no artigo a seguir.
+													</p>
+													<!--end::Text 3-->
+												</div>
+												<!--end::Description-->
+											</div>
+											<!--end::Post content-->
+										</div>
+										<!--end::Content-->
+										<!--begin::Sidebar-->
+										<div class="flex-column flex-lg-row-auto w-100 w-xl-300px mb-10">
+											<!--begin::Search blog-->
+											<div class="mb-16">
+												<h4 class="text-black mb-7">Mais sobre {{curador}}</h4>
+											</div>
+											<!--end::Search blog-->
+											<!--begin::Catigories-->
+											<div class="mb-16">
+												<h4 class="text-black mb-7">Avaliações</h4>
+												<!--begin::Item-->
+												<div class="d-flex flex-stack fw-bold fs-5 text-muted mb-4">
+													<!--begin::Text-->
+                          {% ratings curador 18 18 'read_only' %}
+												</div>
+												<!--end::Item-->
+											</div>
+											<!--end::Catigories-->
+											<!--begin::Recent posts-->
+											<div class="m-0">
+												<h4 class="text-black mb-3">Dê um passo adiante ... </h4>
+												<!--begin::Item-->
+												<div class="d-flex flex-stack mb-7">
+													<!--begin::Title-->
+													<div class="m-0">
+                            <form method="post">
+                              {% csrf_token %}
+                              <span class="text-gray-600 fw-bold d-block pt-1 fs-7">Vamos iniciar o novo clico em sua vida?</span>
+                              <button type="submit" class="btn btn-primary">Contratar</button>
+                            </form>
 
-                        <li class="list-inline-item"> 
-                            <button type="submit" name="save_button" id="save_button" class="btn btn-success ">
-                                <span>
-                                    <span>{% trans 'Quero Contratar' %}</span>
-
-                                </span>
-                            </button>
-                        </li>
-
-                    </ul>
-
-                 </form>
-            </li>
-        </ul>    
-
-        <div class="depoimentos">
-            <h3> {% trans 'Depoimentos' %} </h3>
-            {% for depoimento in curador.consultas_curador.all %}
-                {% if depoimento.is_depoimento_moderado %}
-                  {% if depoimento.data_depoimento %}
-                      <strong> {{ depoimento.data_depoimento }} - {{ depoimento.cliente }}</strong> 
-                      ({{ depoimento.avaliacao_cliente }})
-                      </br>
-
-                      <section class="vh-100" style="background-color: #e5d1c1;">
-                          <div class="container py-5 h-100">
-                            <div class="row d-flex justify-content-center align-items-center -h-100">
-                              <div class="col col-md-6 col-lg-6 col-xl-6">
-                        
-                                <div class="card">
-                                  <div class="card-body">
-                                    <blockquote class="blockquote blockquote-custom bg-white px-3 pt-4">
-                                      <div class="blockquote-custom-icon bg-info shadow-1-strong">
-                                        <i class="fa fa-quote-left text-white"></i>
-                                      </div>
-                                      <p class="mb-0 mt-2 font-italic">
-                                          {{ depoimento.depoimento_cliente }}
-                                        <a href="#" class="text-info">@consequat</a>."
-                                      </p>
-                                      <footer class="blockquote-footer pt-4 mt-4 border-top">
-                                          {{ depoimento.cliente }}
-                                        <cite title="Source Title">{{ depoimento.data_depoimento }}</cite>
-                                      </footer>
-                                    </blockquote>
-                                  </div>
-                                </div>
-                        
-                              </div>
-                            </div>
+													</div>
+													<!--end::Title-->
+												</div>
+												<!--end::Item-->
+											</div>
+                      <br>
+											<!--begin::Especialidades-->
+											<div class="mb-16">
+												<h4 class="text-black mb-7"> Todas as minhas Especialidades </h4>
+												<!--begin::Item-->
+                        {% for especialidade in curador.curador_especialidades.all %}
+                          <div class="d-flex flex-stack fw-bold fs-5 text-muted mb-1">
+                            <!--begin::Text-->
+                            {{ especialidade.especialidade.titulo }}
                           </div>
-                        </section>
-                      </br> </br>
-                  {% endif %}
-                {% endif %}
-            {% endfor depoimento %}
-        </div>
-    </div>
+                       {% endfor %}
+											</div>
+											<!--end::Especialidades-->
+											<!--end::Recent posts-->
+										</div>
+										<!--end::Sidebar-->
+									</div>
+									<!--end::Layout-->
+									<!--begin::Section-->
+									<div class="mb-17">
+										<!--begin::Content-->
+										<div class="d-flex flex-stack mb-5">
+											<!--begin::Title-->
+											<h3 class="text-dark">Alguns vídeos que separei para você</h3>
+											<!--end::Title-->
+										</div>
+										<!--end::Content-->
+										<!--begin::Separator-->
+										<div class="separator separator-dashed mb-9"></div>
+										<!--end::Separator-->
+										<!--begin::Row-->
+										<div class="row g-10">
+											<!--begin::Col-->
+											<div class="col-md-4">
+												<!--begin::Feature post-->
+												<div class="card-xl-stretch me-md-6">
+													<!--begin::Image-->
+													<a class="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style="background-image:url('{% static "metronic/media/stock/600x400/img-73.jpg" %}')" data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/btornGtLwIo">
+														<img src="{% static 'metronic/media/svg/misc/video-play.svg' %}" class="position-absolute top-50 start-50 translate-middle" alt="">
+													</a>
+													<!--end::Image-->
+													<!--begin::Body-->
+													<div class="m-0">
+														<!--begin::Title-->
+														<a href="../../demo12/dist/pages/user-profile/overview.html" class="fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base">Admin Panel - How To Started the Dashboard Tutorial</a>
+														<!--end::Title-->
+														<!--begin::Text-->
+														<div class="fw-bold fs-5 text-gray-600 text-dark my-4">We’ve been focused on making a the from also not been afraid to and step away been focused create eye</div>
+														<!--end::Text-->
+														<!--begin::Content-->
+														<div class="fs-6 fw-bolder">
+															<!--begin::Author-->
+															<a href="../../demo12/dist/pages/user-profile/overview.html" class="text-gray-700 text-hover-primary">Jane Miller</a>
+															<!--end::Author-->
+															<!--begin::Date-->
+															<span class="text-muted">on Mar 21 2021</span>
+															<!--end::Date-->
+														</div>
+														<!--end::Content-->
+													</div>
+													<!--end::Body-->
+												</div>
+												<!--end::Feature post-->
+											</div>
+											<!--end::Col-->
+											<!--begin::Col-->
+											<div class="col-md-4">
+												<!--begin::Feature post-->
+												<div class="card-xl-stretch mx-md-3">
+													<!--begin::Image-->
+													<a class="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style="background-image:url('assets/media/stock/600x400/img-74.jpg')" data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/btornGtLwIo">
+														<img src="assets/media/svg/misc/video-play.svg" class="position-absolute top-50 start-50 translate-middle" alt="">
+													</a>
+													<!--end::Image-->
+													<!--begin::Body-->
+													<div class="m-0">
+														<!--begin::Title-->
+														<a href="../../demo12/dist/pages/user-profile/overview.html" class="fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base">Admin Panel - How To Started the Dashboard Tutorial</a>
+														<!--end::Title-->
+														<!--begin::Text-->
+														<div class="fw-bold fs-5 text-gray-600 text-dark my-4">We’ve been focused on making the from v4 to v5 but we have also not been afraid to step away been focused</div>
+														<!--end::Text-->
+														<!--begin::Content-->
+														<div class="fs-6 fw-bolder">
+															<!--begin::Author-->
+															<a href="../../demo12/dist/pages/user-profile/overview.html" class="text-gray-700 text-hover-primary">Cris Morgan</a>
+															<!--end::Author-->
+															<!--begin::Date-->
+															<span class="text-muted">on Apr 14 2021</span>
+															<!--end::Date-->
+														</div>
+														<!--end::Content-->
+													</div>
+													<!--end::Body-->
+												</div>
+												<!--end::Feature post-->
+											</div>
+											<!--end::Col-->
+											<!--begin::Col-->
+											<div class="col-md-4">
+												<!--begin::Feature post-->
+												<div class="card-xl-stretch ms-md-6">
+													<!--begin::Image-->
+													<a class="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style="background-image:url('assets/media/stock/600x400/img-47.jpg')" data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/TWdDZYNqlg4">
+														<img src="assets/media/svg/misc/video-play.svg" class="position-absolute top-50 start-50 translate-middle" alt="">
+													</a>
+													<!--end::Image-->
+													<!--begin::Body-->
+													<div class="m-0">
+														<!--begin::Title-->
+														<a href="../../demo12/dist/pages/user-profile/overview.html" class="fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base">Admin Panel - How To Started the Dashboard Tutorial</a>
+														<!--end::Title-->
+														<!--begin::Text-->
+														<div class="fw-bold fs-5 text-gray-600 text-dark my-4">We’ve been focused on making the from v4 to v5 but we’ve also not been afraid to step away been focused</div>
+														<!--end::Text-->
+														<!--begin::Content-->
+														<div class="fs-6 fw-bolder">
+															<!--begin::Author-->
+															<a href="../../demo12/dist/pages/user-profile/overview.html" class="text-gray-700 text-hover-primary">Carles Nilson</a>
+															<!--end::Author-->
+															<!--begin::Date-->
+															<span class="text-muted">on May 14 2021</span>
+															<!--end::Date-->
+														</div>
+														<!--end::Content-->
+													</div>
+													<!--end::Body-->
+												</div>
+												<!--end::Feature post-->
+											</div>
+											<!--end::Col-->
+										</div>
+										<!--end::Row-->
+									</div>
+									<!--end::Section-->
+									<!--begin::Section-->
+									<div class="mb-17">
 
-    <h2>{{ curador.curadoraboutme.titulo }}</h2>
-    <p>
-        <em>{{ curador.curadoraboutme.descricao | safe }}</em>
-    </p>
+
+												<!--begin::Depoimentos-->
+                        <br>
+                        <div class="mb-5">
+                          <!--begin::Content-->
+                          <div class="d-flex flex-stack mb-5">
+                            <!--begin::Title-->
+                            <h3 class="text-dark">Depoimentos</h3>
+                            <!--end::Title-->
+                          </div>
+                        </div>
+  
+                          {% for depoimento in curador.consultas_curador.all %}
+                            {% if depoimento.is_depoimento_moderado %}
+                              {% if depoimento.data_depoimento %}
+          
+                                <div class="d-flex align-items-center border-1 border-dashed card-rounded p-5 p-lg-10 mb-14">
+                                  <!--begin::Text-->
+                                  <div class="mb-0 fs-6">
+                                    <div class="text-muted fw-bold lh-lg mb-2">
+                                      {{ depoimento.depoimento_cliente }}
+                                    </div>
+  
+                                    <!--begin::Info-->
+                                    <div class="p-2">
+                                      -<a href="#" class="text-gray-700 fw-bolder text-hover-primary">{{depoimento.cliente.name}}</a>
+                                      <span class="text-gray-400 fs-7 fw-bold d-block mt-1">{{depoimento.data_depoimento}}</span>
+                                    </div>
+                                    <!--end::Info-->
+  
+  
+                                  </div>
+                                  <!--end::Text-->
+                                </div>
+                              {% endif %}
+                            {% endif %}
+                          {% empty %}
+                                  <!--begin::Text-->
+                                  <div class="mb-0 fs-6">
+                                    <div class="text-muted fw-bold lh-lg mb-2">
+                                      Ainda não existe nenhum depoimento
+                                    </div>
+                                  </div>
+                                  <!--end::Text-->
+  
+                          {% endfor%}
+                          <!--end::Depoimentos-->
+                        </div>
+  
+
+                  </div>
+									<!--end::Section-->
+								</div>
+								<!--end::Body-->
+							</div>
+							<!--end::Post card-->
+						</div>
+						<!--end::Post-->
+					</div>
+    
 {% endblock page-content %}
 
 {% block page-extra-scripts %}
-
-    <script type="text/javascript" language="javascript">
-      function contratar_curador(curador_pk){
-
-        // recebe user_id e registra a contratacao
-        anchor_text_id = "curador_selecionado";
-        anchor_clicado = document.getElementById(anchor_text_id);
-        icon_element = anchor_clicado.firstElementChild;
-        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;        
-        spinner_element = document.getElementById("curador_spinner");
-        spinner_element.style.display =  "inline-block";
-        console.log('spinner',spinner_element )
-
-        $.ajax({
-          type: "POST",
-          data: {
-            csrfmiddlewaretoken: csrftoken,
-            curador_pk: curador_pk
-          },
-          success: function(result){
-            console.log('--------------->', curador_pk);
-            location.reload();
-          },
-
-          error: function(result){
-            anchor_clicado.disabled=true;
-            anchor_clicado.innerHTML = 'Ooops! Erro no processo';
-          },
-
-          warning: function(result){
-            anchor_clicado.disabled=true;
-            anchor_clicado.innerHTML = 'Advertência no processo';
-          },
-
-          // os argumentos são passados no 'data' do ajax
-          url: "{% url 'agendamento:json-contratar-curador' %}",
-
-        });
-
-        console.log('O curador em foco é');
-        console.log(curador_pk);
-
-      }
-    </script>
 
 {% endblock page-extra-scripts %} 

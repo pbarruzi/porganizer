@@ -1,27 +1,88 @@
 {% extends "core/base.html" %}
 {% load static widget_tweaks i18n %}
-{% block page-content %}
-    <div class="container">
-        <h2>{% trans "Lista dos nossos Curadores Free" %}</h2>
-        <div class="lista-curadores">
-            {% for curador in nao_remunerados %}
-                <strong>{{ curador }}</strong>
-                (atendimentos:{{ curador.curador_estatisticas.qt }})
-                (média:{{ curador.curador_estatisticas.media }})
-                </br>
-                {% for especialidade in curador.curador_especialidades.all %}
-                    {% if forloop.counter < 4 %}
-                    </br>
-                    -->{{ especialidade.especialidade }}
-                    {% endif %}
-                {% endfor %}
+{% load ratings %}
 
-                </br>
-                </br>
-                <a class="btn"
-                href="{% url 'agendamento:cliente-contratar-curador' curador.pk %}">Contratar</a>
-                </br>
-            {% endfor %}
+{% block page-content %}
+
+    <div class="col-xl-12">
+        <!--begin::Tables Widget 4-->
+        <div class="card card-xl-stretch mb-5 mb-xl-8">
+            <!--begin::Header-->
+            <div class="card-header border-0 pt-5">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bolder fs-3 mb-1">Nossos Curadores que atendem gratuitamente </span>
+                    <span class="text-muted mt-1 fw-bold fs-7">Temos {{SIZE}} curadores nesta relação</span>
+                </h3>
+            </div>
+            <!--end::Header-->
+            <!--begin::Body-->
+            <div class="card-body py-3">
+                <div class="tab-content">
+                    <!--begin::Tap pane-->
+                    <div class="tab-pane fade show active" id="kt_table_widget_4_tab_1">
+                        <!--begin::Table container-->
+                        <div class="table-responsive">
+                            <!--begin::Table-->
+                            <table class="table align-middle gs-0 gy-3">
+                                <!--begin::Table head-->
+                                <thead>
+                                    <tr>
+                                        <th class="p-0 w-50px"></th>
+                                        <th class="p-0 min-w-150px"></th>
+                                        <th class="p-0 min-w-140px"></th>
+                                        <th class="p-0 min-w-120px"></th>
+                                    </tr>
+                                </thead>
+                                <!--end::Table head-->
+                                <!--begin::Table body-->
+                                <tbody>
+                                    {% for curador in nao_remunerados %}
+
+                                        <tr>
+                                            <td>
+                                                <div class="symbol symbol-50px">
+                                                    <img src="{% static 'metronic/media/avatars/300-14.jpg' %}" alt="">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">{{curador}}</a>
+                                                {% for especialidade in curador.curador_especialidades.all %}
+                                                    {% if forloop.counter < 4 %}
+                                                        <span class="text-muted fw-bold d-block fs-8">{{ especialidade.especialidade }}</span>
+                                                    {% endif %}
+                                                {% endfor %}
+                            
+                                            </td>
+                                            <td>
+                                                <span class="text-muted fw-bold d-block fs-7">Rating</span>
+                                                
+                                                <div class="rating">
+                                                    <div class="rating-label me-2 checked">
+                                                        {% ratings curador 18 18 'read_only' %}
+                                                    </div>
+                                                </div>
+                                            </t="#"d>
+                                            <td class="text-end">
+                                                <a href="{% url 'agendamento:cliente-contratar-curador' curador.pk %}" class="btn xbtn-icon xbtn-light-twitter btn-sm me-3">
+                                                    Contratar 
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <!--end::Table body-->
+                            </table>
+                        </div>
+                        <!--end::Table-->
+                    </div>
+                    <!--end::Tap pane-->
+                </div>
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Tables Widget 4-->
     </div>
+
+    
 {% endblock page-content %}
 <div

@@ -1,0 +1,147 @@
+{% extends "core/base.html" %}
+{% load static widget_tweaks i18n %}
+{% block page-content %}
+    {{ block.super }}
+    <h1> Olá {{ user.name }}, </h1>
+    <h2> {% trans "Você está prestes a contratar um atendimento" %}  </h2>
+    <h3>{% trans 'Veja algumas coisas sobre ' %} {{ curador }} </h3>
+    </br>
+    {% blocktrans with qt_atendimentos=curador.curador_estatisticas.qt nt_media=curador.curador_estatisticas.media %}
+        Já realizou {{ qt_atendimentos }} atendimentos. </br>
+        Tem uma nota média de {{nt_media}} nos atendimentos. </br>
+    {% endblocktrans %}        
+    <h3> Suas Especialidades são:</h3>
+    <div class="col-4 lista-especialidades">
+        {% for especialidade in curador.curador_especialidades.all %}
+            <em>--> {{ especialidade.especialidade.titulo }}</em>
+            </br>
+        {% endfor %}
+    </div>
+    </br>
+    <div class="container">
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                 <form method="post">
+                    {% csrf_token %}
+                    <ul class="list-inline">
+
+                        <li class="list-inline-item"> <strong class="text-muted">{% trans '' %}</strong></li>
+                        <li class="list-inline-item"> 
+                            <div class="spinner-border text-primary" role="status" id="curador_spinner">
+                                <span class="sr-only">Aguarde...</span>
+                              </div>
+                        </li>
+
+                        <li class="list-inline-item"> 
+                            <button type="submit" name="save_button" id="save_button" class="btn btn-success ">
+                                <span>
+                                    <span>{% trans 'Quero Contratar' %}</span>
+
+                                </span>
+                            </button>
+                        </li>
+
+                    </ul>
+
+                 </form>
+            </li>
+        </ul>    
+
+        <div class="depoimentos">
+            <h3> {% trans 'Depoimentos' %} </h3>
+            {% for depoimento in curador.consultas_curador.all %}
+                {% if depoimento.is_depoimento_moderado %}
+                  {% if depoimento.data_depoimento %}
+                      <strong> {{ depoimento.data_depoimento }} - {{ depoimento.cliente }}</strong> 
+                      ({{ depoimento.avaliacao_cliente }})
+                      </br>
+
+                      <section class="vh-100" style="background-color: #e5d1c1;">
+                          <div class="container py-5 h-100">
+                            <div class="row d-flex justify-content-center align-items-center -h-100">
+                              <div class="col col-md-6 col-lg-6 col-xl-6">
+                        
+                                <div class="card">
+                                  <div class="card-body">
+                                    <blockquote class="blockquote blockquote-custom bg-white px-3 pt-4">
+                                      <div class="blockquote-custom-icon bg-info shadow-1-strong">
+                                        <i class="fa fa-quote-left text-white"></i>
+                                      </div>
+                                      <p class="mb-0 mt-2 font-italic">
+                                          {{ depoimento.depoimento_cliente }}
+                                        <a href="#" class="text-info">@consequat</a>."
+                                      </p>
+                                      <footer class="blockquote-footer pt-4 mt-4 border-top">
+                                          {{ depbold d-block fs-9">Numerologia</span>
+                                          <span class="text-muted fw-bold d-block fs-9">Forças de Carater</span>
+                                          <span class="text-muted fw-oimento.cliente }}
+                                        <cite title="Source Title">{{ depoimento.data_depoimento }}</cite>
+                                      </footer>
+                                    </blockquote>
+                                  </div>
+                                </div>
+                        
+                              </div>
+                            </div>
+                          </div>
+                        </section>
+                      </br> </br>
+                  {% endif %}
+                {% endif %}
+            {% endfor depoimento %}
+        </div>
+    </div>
+
+    <h2>{{ curador.curadoraboutme.titulo }}</h2>
+    <p>
+        <em>{{ curador.curadoraboutme.descricao | safe }}</em>
+    </p>
+{% endblock page-content %}
+
+{% block page-extra-scripts %}
+
+    <script type="text/javascript" language="javascript">
+      function contratar_curador(curador_pk){
+
+        // recebe user_id e registra a contratacao
+        anchor_text_id = "curador_selecionado";
+        anchor_clicado = document.getElementById(anchor_text_id);
+        icon_element = anchor_clicado.firstElementChild;
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;        
+        spinner_element = document.getElementById("curador_spinner");
+        spinner_element.style.display =  "inline-block";
+        console.log('spinner',spinner_element )
+
+        $.ajax({
+          type: "POST",
+          data: {
+            csrfmiddlewaretoken: csrftoken,
+            curador_pk: curador_pk
+          },
+          success: function(result){
+            console.log('--------------->', curador_pk);
+            location.reload();
+          },
+
+          error: function(result){
+            anchor_clicado.disabled=true;
+            anchor_clicado.innerHTML = 'Ooops! Erro no processo';
+          },
+
+          warning: function(result){
+            anchor_clicado.disabled=true;
+            anchor_clicado.innerHTML = 'Advertência no processo';
+          },
+
+          // os argumentos são passados no 'data' do ajax
+          url: "{% url 'agendamento:json-contratar-curador' %}",
+
+        });
+
+        console.log('O curador em foco é');
+        console.log(curador_pk);
+
+      }
+    </script>
+
+{% endblock page-extra-scripts %} 

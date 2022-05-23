@@ -38,6 +38,7 @@ class CuradoresFreeListView(TemplateView):
         context = super().get_context_data(**kwargs)
         free = [ user for user in account_models.User.curadores.all() if not user.curador_remunerado]
         context['nao_remunerados'] = free
+        context['SIZE'] = len(free)
         return context
 
 class AtendimentoContratarFreeView(TemplateView):
@@ -64,6 +65,8 @@ class CuradoresRemuneradosListView(TemplateView):
         context = super().get_context_data(**kwargs)
         remunerados = [ user for user in account_models.User.curadores.all() if user.curador_remunerado]
         context['remunerados'] = remunerados
+        context['SIZE'] = len(remunerados)
+    
         return context
 
 class AtendimentoContratarRemuneradoView(TemplateView):
