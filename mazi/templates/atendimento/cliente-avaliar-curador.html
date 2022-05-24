@@ -3,68 +3,71 @@
 {% load ratings %}
 {% block page-content %}
 {{ block.super }}
-<h1> {{ user.name }}</h1> 
-<h2>{% trans "Avaliar o Atendimento Recebido" %}</h2>
-<h3>{% trans "Curador: " %}<strong>{{object.curador}}</strong></h3>
-<div class="container">
-  <form method="POST"
-    {{csrf_token}}
 
-    <div class="row lista-passado">
-        <div class="col-lg-8 lista-passado">
-            <span> Data do agendamento: {{object.data_agendamento }} </span>
-            <br/>
-            <span> Data do encerramento: {{object.data_agendamento }} </span>
 
-            {% if object.depoimento_cliente %}
-              <br/><br/><br/>
-              <h4>Seu Depoimento</h4>
-              <div class="card">
-                <br/><br/><br/>
-                <div class="card-body">
-                  <blockquote class="blockquote blockquote-custom bg-white px-3 pt-4">
-                    <div class="blockquote-custom-icon bg-info shadow-1-strong">
-                      <i class="fa fa-quote-left text-white"></i>
-                    </div>
-                    <p class="mb-0 mt-2 font-italic">
-                        {{ object.depoimento_cliente }}
-                      <br/><br/>
-                      <a href="#" class="text-info">Revisar</a>."
-                    </p>
-                    <footer class="blockquote-footer pt-4 mt-4 border-top">
-                        {{ object.cliente }}
-                      <cite title="Source Title">{{ object.data_depoimento }}</cite>
-                    </footer>
-                  </blockquote>
-                </div>
-              </div>
-            {% endif %}
-            <br/>
-            <strong>Faça/Altere seu depoimento</strong>
-            </br>
-            {{form.depoimento_cliente}}
+<div class="d-flex flex-column flex-lg-row">
+  <!--begin::Content-->
+  <div class="flex-lg-row-fluid mb-10 mb-lg-0 me-lg-7 me-xl-10">
+    <!--begin::Card-->
+    <div class="card">
+      <!--begin::Card body-->
+      <div class="card-body p-12">
+        <!--begin::Form-->
+        <form method="POST" id="depoimento_form">
+          {% csrf_token %}
+          {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+          {% endfor %}
+    
+          <!--begin::Separator-->
+          <h3>Fazer depoimento e Avaliar {{object.curador}}
+          <div class="separator separator-dashed my-10"></div>
+          <!--end::Separator-->
+          <!--begin::Wrapper-->
+          <div class="mb-0">
+            <!--begin::Notes-->
+            <div class="mb-0">
+              <label class="form-label fs-6 fw-bolder text-gray-700">Seu Depoimento</label>
+              {{form.depoimento_cliente|add_class:'form-control form-control-lg form-control-solid'}}
+            </div>
+            {{form.depoimento_cliente.errors}}
+            <!--end::Notes-->
+          </div>
+          <!--end::Wrapper-->
+          <!--begin::Actions-->
+          <div class="card-footer d-flex justify-content-end py-6 px-9">
+            <button type="reset" class="btn btn-light btn-active-light-primary me-2">Descartar</button>
+            <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Salvar Depoimento</button>
+          </div>
+          <!--end::Actions-->
 
-           <button type="submit" name="save_button" id="save_button" class="btn btn-success ">
-              <span>
-                  <span>{% trans 'Salvar' %}</span>
-
-              </span>
-          </button>
-
-        </div>
-
-        <div class="col-lg-4">
-            <br>
-            Avaliar <strong>{{curador}}</strong> :</br>{% ratings  object.curador 15 15  %}
-            <br/><br/>
-            <p>
-              * Para Avaliar/Rever o atendimento, clique em uma das estrelas acima.
-              <br/>
-              Sua avaliacao atual é de <strong>{{object.avaliou_curador}} estrelas </strong>
-            </p>
-        </div>        
-
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Card body-->
     </div>
-  </form>
+    <!--end::Card-->
+  </div>
+  <!--end::Content-->
+  <!--begin::Sidebar-->
+  <div class="flex-lg-auto min-w-lg-300px">
+    <!--begin::Card-->
+    <div class="card" data-kt-sticky="true" data-kt-sticky-name="invoice" data-kt-sticky-offset="{default: false, lg: '200px'}" data-kt-sticky-width="{lg: '250px', lg: '300px'}" data-kt-sticky-left="auto" data-kt-sticky-top="150px" data-kt-sticky-animation="false" data-kt-sticky-zindex="95" style="">
+      <!--begin::Card body-->
+      <div class="card-body p-10">
+
+        {% ratings  object.curador 15 15  %}
+        <!--begin::Separator-->
+        <div class="separator separator-dashed mb-8"></div>
+        <!--end::Separator-->
+        <i class="fas fa-exclamation-circle ms-1 fs-3" data-bs-toggle="tooltip" title="" data-bs-original-title="Dê um clique na Estrela que corresponda a sua Avaliação e pronto!" aria-label="Phone number must be active"></i>
+        <h4 class="fw-bolder text-muted m-0">Avalie com apenas um clique!</h4>
+
+      </div>
+      <!--end::Card body-->
+    </div>
+    <!--end::Card-->
+  </div>
+  <!--end::Sidebar-->
 </div>
 {% endblock page-content %}
