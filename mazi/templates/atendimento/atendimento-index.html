@@ -1,295 +1,129 @@
 {% extends "core/base.html" %}
 {% load static widget_tweaks i18n %}
 {% block page-content %}
-        {{ block.super }}
-        <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
-            <!--begin::Col-->
-            <div class="col-xxl-12">
-                <!--begin::Card widget 18-->
-                <div class="card card-flush border-0 h-md-100">
-                    <!--begin::Body-->
-                    <div class="card-body py-9">
-                        <!--begin::Row-->
-                        <div class="row gx-9 h-100">
-                            <!--begin::Col-->
-                            <div class="col-sm-6 mb-10 mb-sm-0">
-                                <!--begin::Image-->
-                                <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-400px min-h-sm-100 h-100" style="background-image:url('{% static "metronic/media/stock/600x600/img-33.jpg" %}');"></div>
-                                <!--end::Image-->
+    {{ block.super }}
+    <!--begin::Row  vindo do PO-->
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="row g-7">
+        <!--begin::Col-->
+        <div class="col-xxl-5">
+            <!--begin::Card-->
+            <div class="card border-0 shadow-none h-lg-100" style="background-color: #A838FF">
+                <!--begin::Card body-->
+                <div class="card-body d-flex flex-column flex-center pb-0 pt-15">
+                    <!--begin::Wrapper-->
+                    <div class="px-10 mb-10">
+                        <!--begin::Heading-->
+                        <h3 class="text-white mb-2 fw-bolder ttext-center text-uppercase mb-6"> Guia da Organização</h3>
+                        <!--end::Heading-->
+                        <!--begin::List-->
+                        <div class="mb-7">
+                            <!--begin::Item-->
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="ki-duotone ki-black-right fs-4 text-white opacity-75 me-3"></i>
+                                <span class="text-white opacity-75">Quem Somos</span>
                             </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-sm-6">
-                                <!--begin::Wrapper-->
-                                <div class="d-flex flex-column h-100">
-
-                                    <div class="col-xl-6">
-                                        <!--begin::Engage widget 1-->
-                                        <div class="card h-xl-100">
-                                            <!--begin::Body-->
-                                            <div class="card-body d-flex flex-column flex-center">
-                                                <!--begin::Heading-->
-                                                <div class="mb-2">
-                                                    <!--begin::Title-->
-                                                    <h1 class="fw-bold text-gray-800 text-center lh-lg">Saiba o quanto a
-                                                    <span class="fw-boldest">Numerologia pode te ajudar!</span></h1>
-                                                    <br>
-                                                    
-                                                    <!--end::Title-->
-                                                    <!--begin::Illustration-->
-                                                    <div class="flex-grow-1 bgi-no-repeat bgi-size-contain bgi-position-x-center card-rounded-bottom h-200px mh-200px my-5 my-lg-12" style="background-image:url('{% static "metronic/media/svg/illustrations/easy/1.svg" %}')"></div>
-                                                    <!--end::Illustration-->
-                                                    <br>
-                                                    <h1 class="fw-bold text-gray-800 text-center lh-lg">Conheça nossos curadores!</h1>
-
-                                                </div>
-                                                <!--end::Heading-->
-                                                <!--begin::Links-->
-                                                <div class="text-center mb-1">
-                                                    <!--begin::Link-->
-                                                    <a class="btn btn-sm btn-primary me-2" href="{% url 'agendamento:curador-free-list' %}">For Free</a>
-                                                    <!--end::Link-->
-                                                    <!--begin::Link-->
-                                                    <a class="btn btn-sm btn-light" href="{% url 'agendamento:curador-remunerado-list' %}">Por Contrato</a>
-                                                    <!--end::Link-->
-                                                </div>
-                                                <!--end::Links-->
-                                            </div>
-                                            <!--end::Body-->
-                                        </div>
-                                        <!--end::Engage widget 1-->
-                                    </div>
-
-                                </div>
-                                <!--end::Wrapper-->
+                            <!--end::Item-->
+                            <!--begin::Item-->
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="ki-duotone ki-black-right fs-4 text-white opacity-75 me-3"></i>
+                                <span class="text-white opacity-75">Lojas</span>
                             </div>
-                            <!--end::Col-->
+                            <!--end::Item-->
+                            <!--begin::Item-->
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="ki-duotone ki-black-right fs-4 text-white opacity-75 me-3"></i>
+                                <span class="text-white opacity-75">Doação Organizada</span>
+                            </div>
+                            <!--end::Item-->
                         </div>
-                        <!--end::Row-->
+                        <!--end::List-->
+                        <!--begin::Link-->
+                        <a href="dashboard.html" class="btn btn-hover-rise text-white bg-white bg-opacity-10 text-uppercase fs-7 fw-bold">Faça seu login</a>
+                        <!--end::Link-->
                     </div>
-                    <!--end::Body-->
+                    <!--end::Wrapper-->
+                    <!--begin::Illustrations-->
+                    <img class="mw-100 h-225px mx-auto mb-lg-n18" src="{% static 'metronic/media/illustrations/sigma-1/12.png' %}" />
+                    <!--end::Illustrations-->
                 </div>
-                <!--end::Card widget 18-->
+                <!--end::Card body-->
             </div>
-            <!--end::Col-->
-            <!--begin::Col-->
-            <div class="col-xxl-12">
-                <!--begin::Engage widget 8-->
-                <div class="card h-md-100" style="background: linear-gradient(112.14deg, #00D2FF 0%, #3A7BD5 100%)">
-                    <!--begin::Body-->
-                    <div class="card-body">
-                        <!--begin::Row-->
-                        <div class="row align-items-center h-100">
-                            <!--begin::Col-->
-                            <div class="col-7 ps-xl-13">
-                                <!--begin::Title-->
-                                <div class="text-white mb-6 pt-6">
-                                    <span class="fs-4 fw-bold me-2 d-block lh-1 pb-2 opacity-75">Tome uma decisão em seu favor </span>
-                                    <span class="fs-2qx fw-bolder">Dê um upgrade nos seus Planos</span>
-                                </div>
-                                <!--end::Title-->
-                                <!--begin::Text-->
-                                <span class="fw-bold text-white fs-6 mb-8 d-block opacity-75">Conheça suas forças e coloque objetivos firmes em sua vida!</span>
-                                <!--end::Text-->
-                                <!--begin::Items-->
-                                <div class="d-flex align-items-center flex-wrap d-grid gap-2 mb-10 mb-xl-20">
-                                    <!--begin::Item-->
-                                    <div class="d-flex align-items-center me-5 me-xl-13">
-                                        <!--begin::Symbol-->
-                                        <div class="symbol symbol-30px symbol-circle me-3">
-                                            <span class="symbol-label" style="background: #35C7FF">
-                                                <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
-                                                <span class="svg-icon svg-icon-5 svg-icon-white">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor"></path>
-                                                        <path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor"></path>
-                                                    </svg>
-                                                </span>
-                                                <!--end::Svg Icon-->
-                                            </span>
-                                        </div>
-                                        <!--end::Symbol-->
-                                        <!--begin::Info-->
-                                        <div class="text-white">
-                                            <span class="fw-bold d-block fs-8 opacity-75">Suas Metas</span>
-                                            <span class="fw-bolder fs-7">Foco</span>
-                                        </div>
-                                        <!--end::Info-->
-                                    </div>
-                                    <!--end::Item-->
-                                    <!--begin::Item-->
-                                    <div class="d-flex align-items-center">
-                                        <!--begin::Symbol-->
-                                        <div class="symbol symbol-30px symbol-circle me-3">
-                                            <span class="symbol-label" style="background: #35C7FF">
-                                                <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
-                                                <span class="svg-icon svg-icon-5 svg-icon-white">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="currentColor"></path>
-                                                        <path opacity="0.3" d="M21.2 17.3C21.4 17.9 21.2 18.5 20.8 18.9L18 21.6C15.8 19.4 15.1 12.8 15.8 7.8C18.3 7.4 20.4 6.70001 21.5 5.60001C20.4 7.00001 20.2 14.5 21.2 17.3ZM8 11.7C8 9 7.7 4.2 5.5 2L2.8 4.8C2.4 5.2 2.2 5.80001 2.4 6.40001C2.7 7.40001 3.00001 9.2 3.10001 11.7C3.10001 15.5 2.40001 17.6 2.10001 18C3.20001 16.9 5.3 16.2 7.8 15.8C8 14.2 8 12.7 8 11.7Z" fill="currentColor"></path>
-                                                    </svg>
-                                                </span>
-                                                <!--end::Svg Icon-->
-                                            </span>
-                                        </div>
-                                        <!--end::Symbol-->
-                                        <!--begin::Info-->
-                                        <div class="text-white">
-                                            <span class="fw-bold opacity-75 d-block fs-8">Suas Forças</span>
-                                            <span class="fw-bolder fs-7">Atitudes</span>
-                                        </div>
-                                        <!--end::Info-->
-                                    </div>
-                                    <!--end::Item-->
-                                </div>
-                                <!--end::Items-->
-                                <!--begin::Action-->
-                                <div class="d-flex flex-column flex-sm-row d-grid gap-2">
-                                    <a href="{% url 'agendamento:curador-remunerado-list' %}" class="btn btn-success flex-shrink-0 me-2" >Contrate um Curador</a>
-                                    <a href="{% url 'agendamento:curador-free-list' %}" class="btn btn-primary flex-shrink-0" style="background: rgba(255, 255, 255, 0.2)">Busque atendimento gratuíto</a>
-                                </div>
-                                <!--end::Action-->
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-5 pt-10">
-                                <!--begin::Illustration-->
-                                <div class="bgi-no-repeat bgi-size-contain bgi-position-x-end h-225px" style="background-image:url('{% static "metronic/media/svg/illustrations/easy/5.svg" %}');"></div>
-                                <!--end::Illustration-->
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Row-->
-                    </div>
-                    <!--end::Body-->
-                </div>
-                <!--end::Engage widget 8-->
-            </div>
-            <!--end::Col-->
+            <!--end::Card-->
         </div>
-
-        <!--begin::Videos-->
-        <div class="mb-17">
-            <!--begin::Content-->
-            <div class="d-flex flex-stack mb-5">
-                <!--begin::Title-->
-                <h3 class="text-dark">Videos Tutoriais</h3>
-                <!--end::Title-->
-            </div>
-            <!--end::Content-->
-            <!--begin::Separator-->
-            <div class="separator separator-dashed mb-9"></div>
-            <!--end::Separator-->
+        <!--end::Col-->
+        <!--begin::Col-->
+        <div class="col-xxl-7">
             <!--begin::Row-->
-            <div class="row g-10">
+            <div class="row g-lg-7">
                 <!--begin::Col-->
-                <div class="col-md-4">
-                    <!--begin::Feature post-->
-                    <div class="card-xl-stretch me-md-6">
-                        <!--begin::Image-->
-                        <a class="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style="background-image:url('{% static "metronic/media/stock/600x400/img-73.jpg" %}')" data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/btornGtLwIo">
-                            <img src="{% static 'metronic/media/svg/misc/video-play.svg' %}" class="position-absolute top-50 start-50 translate-middle" alt="">
-                        </a>
-                        <!--end::Image-->
-                        <!--begin::Body-->
-                        <div class="m-0">
-                            <!--begin::Title-->
-                            <a class="fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base" data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/btornGtLwIo">Numerologia</a>
-                            <!--end::Title-->
-                            <!--begin::Text-->
-                            <div class="fw-bold fs-5 text-gray-600 text-dark my-4">Descubra seu Potencial, Dons e Talentos inatos através da Numerologa</div>
-                            <!--end::Text-->
-                            <!--begin::Content-->
-                            <div class="fs-6 fw-bolder">
-                                <!--begin::Author-->
-                                <a href="../../demo12/dist/pages/user-profile/overview.html" class="text-gray-700 text-hover-primary">Tassi</a>
-                                <!--end::Author-->
-                                <!--begin::Date-->
-                                <span class="text-muted">on Mar 21 2021</span>
-                                <!--end::Date-->
-                            </div>
-                            <!--end::Content-->
+                <div class="col-sm-6">
+                    <!--begin::Card-->
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_create_project" class="card border-0 shadow-none min-h-200px mb-7" style="background-color: #F9666E">
+                        <!--begin::Card body-->
+                        <div class="card-body d-flex flex-column flex-center text-center">
+                            <!--begin::Illustrations-->
+                            <img class="mw-100 h-100px mb-7 mx-auto" src="{% static 'metronic/media/illustrations/sigma-1/4.png' %}" />
+                            <!--end::Illustrations-->
+                            <!--begin::Heading-->
+                            <h4 class="text-white fw-bold text-uppercase">Guias Práticos</h4>
+                            <!--end::Heading-->
                         </div>
-                        <!--end::Body-->
-                    </div>
-                    <!--end::Feature post-->
+                        <!--end::Card body-->
+                    </a>
+                    <!--end::Card-->
                 </div>
                 <!--end::Col-->
                 <!--begin::Col-->
-                <div class="col-md-4">
-                    <!--begin::Feature post-->
-                    <div class="card-xl-stretch mx-md-3">
-                        <!--begin::Image-->
-                        <a class="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style="background-image:url('{% static "metronic/media/stock/600x400/img-74.jpg" %}')" data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/btornGtLwIo">
-                            <img src="{% static 'metronic/media/svg/misc/video-play.svg' %}" class="position-absolute top-50 start-50 translate-middle" alt="">
-                        </a>
-                        <!--end::Image-->
-                        <!--begin::Body-->
-                        <div class="m-0">
-                            <!--begin::Title-->
-                            <a data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/btornGtLwIo" class="fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base">Numerologia Empresarial</a>
-                            <!--end::Title-->
-                            <!--begin::Text-->
-                            <div class="fw-bold fs-5 text-gray-600 text-dark my-4">Um dos usos da Numerologia que mais cresce é sua aplicação para encontrar o nome apropriado para empresas ou produtos que as pessoas almejam criar. Por mais que a Numerologia empresarial  seja um estudo complexo, é possível aprender algumas dicas que devem ser levadas em conta nesta decisão.</div>
-                            <!--end::Text-->
-                            <!--begin::Content-->
-                            <div class="fs-6 fw-bolder">
-                                <!--begin::Author-->
-                                <a href="../../demo12/dist/pages/user-profile/overview.html" class="text-gray-700 text-hover-primary">Tassi e Edu Oliva</a>
-                                <!--end::Author-->
-                                <!--begin::Date-->
-                                <span class="text-muted">on Apr 14 2021</span>
-                                <!--end::Date-->
-                            </div>
-                            <!--end::Content-->
+                <div class="col-sm-6">
+                    <!--begin::Card-->
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_create_account" class="card border-0 shadow-none min-h-200px mb-7" style="background-color: #35D29A">
+                        <!--begin::Card body-->
+                        <div class="card-body d-flex flex-column flex-center text-center">
+                            <!--begin::Illustrations-->
+                            <img class="mw-100 h-100px mb-7 mx-auto" src="{% static 'metronic/media/illustrations/sigma-1/5.png' %}" />
+                            <!--end::Illustrations-->
+                            <!--begin::Heading-->
+                            <h4 class="text-white fw-bold text-uppercase">Cursos e Eventos</h4>
+                            <!--end::Heading-->
                         </div>
-                        <!--end::Body-->
-                    </div>
-                    <!--end::Feature post-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-md-4">
-                    <!--begin::Feature post-->
-                    <div class="card-xl-stretch ms-md-6">
-                        <!--begin::Image-->
-                        <a class="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style="background-image:url('{% static "metronic/media/stock/600x400/img-47.jpg" %}')" data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/TWdDZYNqlg4">
-                            <img src="{% static 'metronic/media/svg/misc/video-play.svg' %}" class="position-absolute top-50 start-50 translate-middle" alt="">
-                        </a>
-                        <!--end::Image-->
-                        <!--begin::Body-->
-                        <div class="m-0">
-                            <!--begin::Title-->
-                            <a data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/TWdDZYNqlg4" class="fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base">Forças de Carater</a>
-                            <!--end::Title-->
-                            <!--begin::Text-->
-                            <div class="fw-bold fs-5 text-gray-600 text-dark my-4">As Forças de Caráter são as partes positivas de sua personalidade que afetam como você pensa, sente e se comporta. Os cientistas da Psicologia Positiva identificaram 6 Virtudes e 24 Forças de Caráter que você tem a capacidade de expressar.</div>
-                            <!--end::Text-->
-                            <!--begin::Content-->
-                            <div class="fs-6 fw-bolder">
-                                <!--begin::Author-->
-                                <a href="../../demo12/dist/pages/user-profile/overview.html" class="text-gray-700 text-hover-primary">Edu Oliva</a>
-                                <!--end::Author-->
-                                <!--begin::Date-->
-                                <span class="text-muted">on May 14 2021</span>
-                                <!--end::Date-->
-                            </div>
-                            <!--end::Content-->
-                        </div>
-                        <!--end::Body-->
-                    </div>
-                    <!--end::Feature post-->
+                        <!--end::Card body-->
+                    </a>
+                    <!--end::Card-->
                 </div>
                 <!--end::Col-->
             </div>
             <!--end::Row-->
-            <!--begin::Separator-->
-            <br>
-            <div class="separator separator-dashed mb-9"></div>
-            <!--end::Separator-->
-            
+            <!--begin::Card-->
+            <div class="card border-0 shadow-none min-h-200px" style="background-color: #D5D83D">
+                <!--begin::Card body-->
+                <div class="card-body d-flex flex-center flex-wrap">
+                    <!--begin::Illustrations-->
+                    <img class="mw-100 h-200px me-4 mb-5 mb-lg-0" src="{% static 'metronic/media/illustrations/sigma-1/11.png' %}" />
+                    <!--end::Illustrations-->
+                    <!--begin::Wrapper-->
+                    <div class="d-flex flex-column align-items-center align-items-md-start flex-grow-1" data-bs-theme="light">
+                        <!--begin::Heading-->
+                        <h3 class="text-gray-900 fw-bolder text-uppercase mb-5">Profissional de Organização</h3>
+                        <!--end::Heading-->
+                        <!--begin::List-->
+                        <div class="text-gray-800 mb-5 text-center text-md-start">Market Place Ligando quem <strong>Procura</strong> com quem <br> <strong>Oferece</strong><br>. </div>
+                        <!--end::List-->
+                        <!--begin::Link-->
+                        <a href="https://preview.keenthemes.com/html/metronic/docs" class="btn btn-hover-rise text-gray-900 text-uppercase fs-7 fw-bold" style="background-color: #EBEE51">Explorar</a>
+                        <!--end::Link-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card-->
         </div>
-        <!--end::Videos-->
+        <!--end::Col-->
+    </div>
+    <!--end::Row-->
 
-
-  {% endblock page-content %}
+    {% endblock page-content %}

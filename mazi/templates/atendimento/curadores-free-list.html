@@ -4,85 +4,708 @@
 
 {% block page-content %}
 
-    <div class="col-xl-12">
-        <!--begin::Tables Widget 4-->
-        <div class="card card-xl-stretch mb-5 mb-xl-8">
-            <!--begin::Header-->
-            <div class="card-header border-0 pt-5">
-                <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label fw-bolder fs-3 mb-1">Nossos Curadores que atendem gratuitamente </span>
-                    <span class="text-muted mt-1 fw-bold fs-7">Temos {{SIZE}} curadores nesta relação</span>
-                </h3>
-            </div>
-            <!--end::Header-->
-            <!--begin::Body-->
-            <div class="card-body py-3">
-                <div class="tab-content">
-                    <!--begin::Tap pane-->
-                    <div class="tab-pane fade show active" id="kt_table_widget_4_tab_1">
-                        <!--begin::Table container-->
-                        <div class="table-responsive">
-                            <!--begin::Table-->
-                            <table class="table align-middle gs-0 gy-3">
-                                <!--begin::Table head-->
-                                <thead>
-                                    <tr>
-                                        <th class="p-0 w-50px"></th>
-                                        <th class="p-0 min-w-150px"></th>
-                                        <th class="p-0 min-w-140px"></th>
-                                        <th class="p-0 min-w-120px"></th>
-                                    </tr>
-                                </thead>
-                                <!--end::Table head-->
-                                <!--begin::Table body-->
-                                <tbody>
-                                    {% for curador in nao_remunerados %}
+<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start  container-xxl ">
 
-                                        <tr>
-                                            <td>
-                                                <div class="symbol symbol-50px">
-                                                    <img src="{% static 'metronic/media/avatars/300-14.jpg' %}" alt="">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">{{curador}}</a>
-                                                {% for especialidade in curador.curador_especialidades.all %}
-                                                    {% if forloop.counter < 4 %}
-                                                        <span class="text-muted fw-bold d-block fs-8">{{ especialidade.especialidade }}</span>
-                                                    {% endif %}
-                                                {% endfor %}
-                            
-                                            </td>
-                                            <td>
-                                                <span class="text-muted fw-bold d-block fs-7">Rating</span>
-                                                
-                                                <div class="rating">
-                                                    <div class="rating-label me-2 checked">
-                                                        {% ratings curador 18 18 'read_only' %}
-                                                    </div>
-                                                </div>
-                                            </t="#"d>
-                                            <td class="text-end">
-                                                <a href="{% url 'agendamento:cliente-contratar-curador' curador.pk %}" class="btn xbtn-icon xbtn-light-twitter btn-sm me-3">
-                                                    Contratar 
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                                <!--end::Table body-->
-                            </table>
-                        </div>
-                        <!--end::Table-->
-                    </div>
-                    <!--end::Tap pane-->
-                </div>
+<!--begin::Post-->
+<div class="content flex-row-fluid" id="kt_content">
+<!--begin::FAQ card-->
+<div class="card">     
+<!--begin::Body-->
+<div class="card-body p-lg-15">               
+<!--begin::Classic content-->
+<div class="mb-13">
+<!--begin::Intro-->
+<div class="mb-15">
+<!--begin::Title-->
+<h4 class="fs-2x text-gray-800 w-bolder mb-6">                           
+Market Place dos Profissionais de Organização              
+</h4>
+<!--end::Title-->
+
+<!--begin::Text-->
+<p class="fw-semibold fs-4 text-gray-600 mb-2">
+Ligando profissionais e consumidores  
+</p>
+<!--end::Text-->
+</div>    
+<!--end::Intro-->
+
+<!--begin::Row-->
+<div class="row mb-12">
+<!--begin::Col-->
+<div class="col-md-6 pe-md-10 mb-10 mb-md-0">
+<!--begin::Title-->
+<h2 class="text-gray-800 fw-bold mb-4">                           
+Encontre o Personal Organizer - PO.          
+</h2>
+<!--end::Title-->
+
+<!--begin::Accordion-->
+
+
+<!--begin::Section-->
+<div class="m-0">
+<!--begin::Heading-->
+<div class="d-flex align-items-center collapsible py-3 toggle  mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_4_1">
+<!--begin::Icon-->
+<div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+<i class="ki-duotone ki-minus-square toggle-on text-primary fs-1"><span class="path1"></span><span class="path2"></span></i>                
+<i class="ki-duotone ki-plus-square toggle-off fs-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i> 
+</div>
+<!--end::Icon-->
+
+<!--begin::Title-->
+<h4 class="text-gray-700 fw-bold cursor-pointer mb-0">                           
+Como funciona?                               
+</h4>
+<!--end::Title-->
+</div>
+<!--end::Heading-->  
+
+<!--begin::Body-->
+<div id="kt_job_4_1" class="collapse show fs-6 ms-1">
+<!--begin::Text-->
+<div class="mb-4 text-gray-600 fw-semibold fs-6 ps-10">
+    Identifique na lista o PO que deseja contratar e clique na imagem.
+    <br> você será levado para a home page do profissional onde, além de conhecer mais
+    sobre ele, também terá acesso às informações para contato.
+</div>
+<!--end::Text-->
+</div>                
+<!--end::Content-->
+
+</div>
+<!--end::Section-->
+
+
+
+
+
+<!--end::Accordion-->  
+</div>
+<!--end::Col-->
+
+<!--begin::Col-->
+<div class="col-md-6 ps-md-10">
+<!--begin::Title-->
+<h2 class="text-gray-800 fw-bold mb-4">                           
+Divulgue nossos Serviços            
+</h2>
+<!--end::Title-->
+
+<!--begin::Accordion-->
+
+
+<!--begin::Section-->
+<div class="m-0">
+<!--begin::Heading-->
+<div class="d-flex align-items-center collapsible py-3 toggle  mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_5_1">
+<!--begin::Icon-->
+<div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+<i class="ki-duotone ki-minus-square toggle-on text-primary fs-1"><span class="path1"></span><span class="path2"></span></i>                
+<i class="ki-duotone ki-plus-square toggle-off fs-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i> 
+</div>
+<!--end::Icon-->
+
+<!--begin::Title-->
+<h4 class="text-gray-700 fw-bold cursor-pointer mb-0">                           
+Não se esqueça de Compartilhar                             
+</h4>
+<!--end::Title-->
+</div>
+<!--end::Heading-->  
+
+<!--begin::Body-->
+<div id="kt_job_5_1" class="collapse show fs-6 ms-1">
+<!--begin::Text-->
+<div class="mb-4 text-gray-600 fw-semibold fs-6 ps-10">
+    Pedimos a gentileza de compartilhar nossos serviços
+</div>
+<!--end::Text-->
+</div>                
+<!--end::Content-->
+</div>
+<!--end::Section-->
+
+
+<!--begin::Section-->
+<div class="m-0">
+<!--begin::Heading-->
+<div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_5_2">
+<!--begin::Icon-->
+<div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+<i class="ki-duotone ki-minus-square toggle-on text-primary fs-1"><span class="path1"></span><span class="path2"></span></i>                
+<i class="ki-duotone ki-plus-square toggle-off fs-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i> 
+</div>
+<!--end::Icon-->
+
+</div>
+<!--end::Section-->
+
+</div>
+<!--end::Row-->
+
+</div>
+<!--end::Classic content-->
+
+
+<!--begin::Section-->
+<div class="mb-17">
+<!--begin::Content-->
+<br>
+<div class="d-flex flex-stack mb-5">
+<!--begin::Title-->
+<h3 class="text-gray-900">Personal Organizers</h3>
+<!--end::Title-->
+
+</div>  
+<!--end::Content-->          
+
+<!--begin::Separator-->
+<div class="separator separator-dashed mb-9"></div>
+<!--end::Separator-->
+
+<!--begin::Row-->
+<div class="row g-10"> 
+<!--begin::Col-->   
+<div class="col-md-4">           
+<!--begin::Feature post-->
+<div class="card-xl-stretch me-md-6">    
+<!--begin::Image-->
+<a class="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style="background-image:url('{% static '/media/avatars/300-4.jpg' %}')" data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/btornGtLwIo">   
+
+</a> 
+<!--end::Image-->
+
+<!--begin::Body-->
+<div class="m-0">    
+<!--begin::Title-->
+<a 
+    href="/metronic8/demo12/pages/user-profile/overview.html" 
+    class="fs-4 text-gray-900 fw-bold text-hover-primary text-gray-900 lh-base">
+    <!--begin::Info-->                        
+    <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
+        <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
+            <i class="ki-duotone ki-profile-circle fs-4 me-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i> PNE
+        </a>
+        <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
+            <i class="ki-duotone ki-geolocation fs-4 me-1"><span class="path1"></span><span class="path2"></span></i>Melhor Idade
+        </a>
+        <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary mb-2">
+            <i class="ki-duotone ki-sms fs-4"><span class="path1"></span><span class="path2"></span></i>Crianças
+        </a>
+
+        <!--begin::Alert-->
+        <div class="alert alert-dismissible bg-light-info border border-info border-dashed d-flex flex-column flex-sm-row w-100 p-5 mb-3">
+            <!--begin::Icon-->
+            <i class="ki-duotone ki-notification-bing fs-2hx text-primary me-4 mb-5 mb-sm-0"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+            <!--end::Icon-->
+
+            <!--begin::Wrapper-->
+            <div class="d-flex flex-column pe-0 pe-sm-10">
+                <!--begin::Title-->
+                <h4 class="fw-semibold">Pré e Pós Mudança</h4>
+                <!--end::Title-->
+
+                <!--begin::Content-->
+                <blockquote>
+                    Consultoria em Organização Residencial, Pré e Pós Mudanças
+                </blockquote>
+                <!--end::Content-->
             </div>
-            <!--end::Body-->
+            <!--end::Wrapper-->
         </div>
-        <!--end::Tables Widget 4-->
+        <!--end::Alert-->        
     </div>
+    <!--end::Info-->
 
+</a>       
+<!--end::Title-->
+
+<!--begin::Text-->
+<div class="fw-semibold fs-6 text-gray-600 text-gray-900 my-4">    
+
+    79 anos de experiência em organizar Mudanças
+</div>
+<!--end::Text-->
+
+<!--begin::Content-->
+<div class="fs-4 fw-bold">
+<!--begin::Author-->
+<a href="/metronic8/demo12/pages/user-profile/overview.html" class="text-gray-700 text-hover-primary fs-3">Iris Jopplin</a>
+<!--end::Author-->
+
+<!--begin::Date-->
+<span class="text-muted fs-7">Personal Organizer</span>   
+  
+<!--end::Date-->              
+</div>
+<!--end::Content-->      
+</div>
+<!--end::Body-->                      
+</div>
+<!--end::Feature post-->
+
+
+
+</div>  
+<!--end::Col-->   
+
+<!--begin::Col-->  
+<div class="col-md-4">           
+<!--begin::Feature post-->
+<div class="card-xl-stretch mx-md-3">    
+<!--begin::Image-->
+<a class="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style="background-image:url('{% static '/media/avatars/300-14.jpg' %}')" data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/btornGtLwIo">   
+
+<img src="/metronic8/demo12/assets/media/svg/misc/video-play.svg" class="position-absolute top-50 start-50 translate-middle" alt="">
+</a> 
+<!--end::Image-->
+
+<!--begin::Body-->
+<div class="m-0">    
+<!--begin::Title-->
+<a href="/metronic8/demo12/pages/user-profile/overview.html" class="fs-4 text-gray-900 fw-bold text-hover-primary text-gray-900 lh-base">
+    <!--begin::Info-->                        
+    <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
+        <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
+            <i class="ki-duotone ki-profile-circle fs-4 me-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i> Mudanças
+        </a>
+        <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
+            <i class="ki-duotone ki-geolocation fs-4 me-1"><span class="path1"></span><span class="path2"></span></i>Armários
+        </a>
+        <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary mb-2">
+            <i class="ki-duotone ki-sms fs-4"><span class="path1"></span><span class="path2"></span></i>Adegas
+        </a>
+
+        <!--begin::Alert-->
+        <div class="alert alert-dismissible bg-light-info border border-info border-dashed d-flex flex-column flex-sm-row w-100 p-5 mb-3">
+            <!--begin::Icon-->
+            <i class="ki-duotone ki-notification-bing fs-2hx text-primary me-4 mb-5 mb-sm-0"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+            <!--end::Icon-->
+
+            <!--begin::Wrapper-->
+            <div class="d-flex flex-column pe-0 pe-sm-10">
+                <!--begin::Title-->
+                <h4 class="fw-semibold">Organizar é Arrumar a Vida!</h4>
+                <!--end::Title-->
+
+                <!--begin::Content-->
+                <blockquote>
+                    Organizar é arrumar a vida, criar espaço, enxergar possibilidades.
+                    Organizamos seu espaço a fim de proporcionar uma experiência incrível na relação com seu ambiente.
+                </blockquote>
+                <!--end::Content-->
+            </div>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Alert-->        
+    </div>
+    <!--end::Info-->
+</a>       
+<!--end::Title-->
+
+<!--begin::Content-->
+<div class="fs-4 fw-bold">
+<!--begin::Author-->
+<a href="/metronic8/demo12/pages/user-profile/overview.html" class="text-gray-700 text-hover-primary">Cris Morgan</a>
+<!--end::Author-->
+
+<!--begin::Date-->
+<span class="text-muted">PO & Coach</span>     
+<!--end::Date-->              
+</div>
+<!--end::Content-->      
+</div>
+<!--end::Body-->                      
+</div>
+<!--end::Feature post-->
+
+
+
+</div>   
+<!--end::Col-->   
+
+<!--begin::Col-->  
+<div class="col-md-4">           
+<!--begin::Feature post-->
+<div class="card-xl-stretch ms-md-6">    
+<!--begin::Image-->
+<a class="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style="background-image:url('{% static '/media/avatars/300-18.jpg' %}')" data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/TWdDZYNqlg4">   
+
+<img src="/metronic8/demo12/assets/media/svg/misc/video-play.svg" class="position-absolute top-50 start-50 translate-middle" alt="">
+</a> 
+<!--end::Image-->
+
+<!--begin::Body-->
+<div class="m-0">    
+<!--begin::Title-->
+<a href="/metronic8/demo12/pages/user-profile/overview.html" class="fs-4 text-gray-900 fw-bold text-hover-primary text-gray-900 lh-base">
+    <!--begin::Info-->                        
+    <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
+        <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
+            <i class="ki-duotone ki-profile-circle fs-4 me-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i> Mudanças
+        </a>
+        <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
+            <i class="ki-duotone ki-geolocation fs-4 me-1"><span class="path1"></span><span class="path2"></span></i>Armários
+        </a>
+        <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary mb-2">
+            <i class="ki-duotone ki-sms fs-4"><span class="path1"></span><span class="path2"></span></i>Adegas
+        </a>
+
+        <!--begin::Alert-->
+        <div class="alert alert-dismissible bg-light-info border border-info border-dashed d-flex flex-column flex-sm-row w-100 p-5 mb-3">
+            <!--begin::Icon-->
+            <i class="ki-duotone ki-notification-bing fs-2hx text-primary me-4 mb-5 mb-sm-0"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+            <!--end::Icon-->
+
+            <!--begin::Wrapper-->
+            <div class="d-flex flex-column pe-0 pe-sm-10">
+                <!--begin::Title-->
+                <h4 class="fw-semibold">Organizar é trazer Leveza!</h4>
+                <!--end::Title-->
+
+                <!--begin::Content-->
+                <blockquote>
+                    Experimente a leveza e praticidade de interagir com um ambiente bem organizado!
+                </blockquote>
+                <!--end::Content-->
+            </div>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Alert-->        
+    </div>
+    <!--end::Info-->
+</a>       
+<!--end::Title-->
+
+<!--begin::Content-->
+<div class="fs-4 fw-bold">
+<!--begin::Author-->
+<a href="/metronic8/demo12/pages/user-profile/overview.html" class="text-gray-700 text-hover-primary">Carles Nilson</a>
+<!--end::Author-->
+
+<!--begin::Date-->
+<span class="text-muted">Personal Organizer</span>     
+<!--end::Date-->              
+</div>
+<!--end::Content-->      
+</div>
+<!--end::Body-->                      
+</div>
+<!--end::Feature post-->
+
+
+
+</div>   
+<!--end::Col-->      
+</div>
+<!--end::Row-->
+
+<!--begin::Separator-->
+<div class="separator separator-dashed m-9"></div>
+<!--end::Separator-->
+
+<!--begin::Row-->
+<div class="row g-10"> 
+    <!--begin::Col-->   
+    <div class="col-md-4">           
+    <!--begin::Feature post-->
+    <div class="card-xl-stretch me-md-6 ">    
+    <!--begin::Image-->
+    <a class="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style="background-image:url('{% static '/media/avatars/300-6.jpg' %}')" data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/btornGtLwIo">   
     
+    </a> 
+    <!--end::Image-->
+    
+    <!--begin::Body-->
+    <div class="m-0">    
+    <!--begin::Title-->
+    <a 
+        href="/metronic8/demo12/pages/user-profile/overview.html" 
+        class="fs-4 text-gray-900 fw-bold text-hover-primary text-gray-900 lh-base">
+        <!--begin::Info-->                        
+        <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
+            <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
+                <i class="ki-duotone ki-profile-circle fs-4 me-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i> PNE
+            </a>
+            <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
+                <i class="ki-duotone ki-geolocation fs-4 me-1"><span class="path1"></span><span class="path2"></span></i>Melhor Idade
+            </a>
+            <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary mb-2">
+                <i class="ki-duotone ki-sms fs-4"><span class="path1"></span><span class="path2"></span></i>Crianças
+            </a>
+    
+            <!--begin::Alert-->
+            <div class="alert alert-dismissible bg-light-info border border-info border-dashed d-flex flex-column flex-sm-row w-100 p-5 mb-3">
+                <!--begin::Icon-->
+                <i class="ki-duotone ki-notification-bing fs-2hx text-primary me-4 mb-5 mb-sm-0"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                <!--end::Icon-->
+    
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-column pe-0 pe-sm-10">
+                    <!--begin::Title-->
+                    <h4 class="fw-semibold">Pré e Pós Mudança</h4>
+                    <!--end::Title-->
+    
+                    <!--begin::Content-->
+                    <blockquote>
+                        Consultoria em Organização Residencial, Pré e Pós Mudanças
+                    </blockquote>
+                    <!--end::Content-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Alert-->        
+        </div>
+        <!--end::Info-->
+    
+    </a>       
+    <!--end::Title-->
+    
+    <!--begin::Text-->
+    <div class="fw-semibold fs-6 text-gray-600 text-gray-900 my-4">    
+    
+        79 anos de experiência em organizar Mudanças
+    </div>
+    <!--end::Text-->
+    
+    <!--begin::Content-->
+    <div class="fs-4 fw-bold">
+    <!--begin::Author-->
+    <a href="/metronic8/demo12/pages/user-profile/overview.html" class="text-gray-700 text-hover-primary fs-3">Iris Jopplin</a>
+    <!--end::Author-->
+    
+    <!--begin::Date-->
+    <span class="text-muted fs-7">Personal Organizer</span>   
+      
+    <!--end::Date-->              
+    </div>
+    <!--end::Content-->      
+    </div>
+    <!--end::Body-->                      
+    </div>
+    <!--end::Feature post-->
+    
+    
+    
+    </div>  
+    <!--end::Col-->   
+    
+    <!--begin::Col-->  
+    <div class="col-md-4">           
+    <!--begin::Feature post-->
+    <div class="card-xl-stretch mx-md-3">    
+    <!--begin::Image-->
+    <a class="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style="background-image:url('{% static '/media/avatars/300-10.jpg' %}')" data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/btornGtLwIo">   
+    
+    <img src="/metronic8/demo12/assets/media/svg/misc/video-play.svg" class="position-absolute top-50 start-50 translate-middle" alt="">
+    </a> 
+    <!--end::Image-->
+    
+    <!--begin::Body-->
+    <div class="m-0">    
+    <!--begin::Title-->
+    <a href="/metronic8/demo12/pages/user-profile/overview.html" class="fs-4 text-gray-900 fw-bold text-hover-primary text-gray-900 lh-base">
+        <!--begin::Info-->                        
+        <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
+            <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
+                <i class="ki-duotone ki-profile-circle fs-4 me-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i> Mudanças
+            </a>
+            <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
+                <i class="ki-duotone ki-geolocation fs-4 me-1"><span class="path1"></span><span class="path2"></span></i>Armários
+            </a>
+            <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary mb-2">
+                <i class="ki-duotone ki-sms fs-4"><span class="path1"></span><span class="path2"></span></i>Adegas
+            </a>
+    
+            <!--begin::Alert-->
+            <div class="alert alert-dismissible bg-light-info border border-info border-dashed d-flex flex-column flex-sm-row w-100 p-5 mb-3">
+                <!--begin::Icon-->
+                <i class="ki-duotone ki-notification-bing fs-2hx text-primary me-4 mb-5 mb-sm-0"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                <!--end::Icon-->
+    
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-column pe-0 pe-sm-10">
+                    <!--begin::Title-->
+                    <h4 class="fw-semibold">Organizar é Arrumar a Vida!</h4>
+                    <!--end::Title-->
+    
+                    <!--begin::Content-->
+                    <blockquote>
+                        Organizar é arrumar a vida, criar espaço, enxergar possibilidades.
+                        Organizamos seu espaço a fim de proporcionar uma experiência incrível na relação com seu ambiente.
+                    </blockquote>
+                    <!--end::Content-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Alert-->        
+        </div>
+        <!--end::Info-->
+    </a>       
+    <!--end::Title-->
+    
+    <!--begin::Content-->
+    <div class="fs-4 fw-bold">
+    <!--begin::Author-->
+    <a href="/metronic8/demo12/pages/user-profile/overview.html" class="text-gray-700 text-hover-primary">Cris Morgan</a>
+    <!--end::Author-->
+    
+    <!--begin::Date-->
+    <span class="text-muted">PO & Coach</span>     
+    <!--end::Date-->              
+    </div>
+    <!--end::Content-->      
+    </div>
+    <!--end::Body-->                      
+    </div>
+    <!--end::Feature post-->
+    
+    
+    
+    </div>   
+    <!--end::Col-->   
+    
+    <!--begin::Col-->  
+    <div class="col-md-4">           
+    <!--begin::Feature post-->
+    <div class="card-xl-stretch ms-md-6">    
+    <!--begin::Image-->
+    <a class="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style="background-image:url('{% static '/media/avatars/300-12.jpg' %}')" data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/TWdDZYNqlg4">   
+    
+    <img src="/metronic8/demo12/assets/media/svg/misc/video-play.svg" class="position-absolute top-50 start-50 translate-middle" alt="">
+    </a> 
+    <!--end::Image-->
+    
+    <!--begin::Body-->
+    <div class="m-0">    
+    <!--begin::Title-->
+    <a href="/metronic8/demo12/pages/user-profile/overview.html" class="fs-4 text-gray-900 fw-bold text-hover-primary text-gray-900 lh-base">
+        <!--begin::Info-->                        
+        <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
+            <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
+                <i class="ki-duotone ki-profile-circle fs-4 me-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i> Mudanças
+            </a>
+            <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
+                <i class="ki-duotone ki-geolocation fs-4 me-1"><span class="path1"></span><span class="path2"></span></i>Armários
+            </a>
+            <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary mb-2">
+                <i class="ki-duotone ki-sms fs-4"><span class="path1"></span><span class="path2"></span></i>Adegas
+            </a>
+    
+            <!--begin::Alert-->
+            <div class="alert alert-dismissible bg-light-info border border-info border-dashed d-flex flex-column flex-sm-row w-100 p-5 mb-3">
+                <!--begin::Icon-->
+                <i class="ki-duotone ki-notification-bing fs-2hx text-primary me-4 mb-5 mb-sm-0"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                <!--end::Icon-->
+    
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-column pe-0 pe-sm-10">
+                    <!--begin::Title-->
+                    <h4 class="fw-semibold">Organizar é trazer Leveza!</h4>
+                    <!--end::Title-->
+    
+                    <!--begin::Content-->
+                    <blockquote>
+                        Experimente a leveza e praticidade de interagir com um ambiente bem organizado!
+                    </blockquote>
+                    <!--end::Content-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Alert-->        
+        </div>
+        <!--end::Info-->
+    </a>       
+    <!--end::Title-->
+    
+    <!--begin::Content-->
+    <div class="fs-4 fw-bold">
+    <!--begin::Author-->
+    <a href="/metronic8/demo12/pages/user-profile/overview.html" class="text-gray-700 text-hover-primary">Carles Nilson</a>
+    <!--end::Author-->
+    
+    <!--begin::Date-->
+    <span class="text-muted">Personal Organizer</span>     
+    <!--end::Date-->              
+    </div>
+    <!--end::Content-->      
+    </div>
+    <!--end::Body-->                      
+    </div>
+    <!--end::Feature post-->
+    
+    
+    
+    </div>   
+    <!--end::Col-->      
+    </div>
+    <!--end::Row-->
+    
+
+</div>
+<!--end::Section-->
+
+<!--begin::Card-->
+<div class="card mb-4 bg-light text-center ">
+<!--begin::Body-->
+<div class="card-body py-12">
+<!--begin::Icon-->
+<a href="#" class="mx-4">
+<img src="/metronic8/demo12/assets/media/svg/brand-logos/facebook-4.svg" class="h-30px my-2" alt="">  
+</a>
+<!--end::Icon-->  
+
+<!--begin::Icon-->
+<a href="#" class="mx-4">
+<img src="/metronic8/demo12/assets/media/svg/brand-logos/instagram-2-1.svg" class="h-30px my-2" alt="">  
+</a>
+<!--end::Icon-->  
+
+<!--begin::Icon-->
+<a href="#" class="mx-4">
+<img src="/metronic8/demo12/assets/media/svg/brand-logos/github.svg" class="h-30px my-2" alt="">  
+</a>
+<!--end::Icon-->  
+
+<!--begin::Icon-->
+<a href="#" class="mx-4">
+<img src="/metronic8/demo12/assets/media/svg/brand-logos/behance.svg" class="h-30px my-2" alt="">  
+</a>
+<!--end::Icon-->  
+
+<!--begin::Icon-->
+<a href="#" class="mx-4">
+<img src="/metronic8/demo12/assets/media/svg/brand-logos/pinterest-p.svg" class="h-30px my-2" alt="">  
+</a>
+<!--end::Icon-->  
+
+<!--begin::Icon-->
+<a href="#" class="mx-4">
+<img src="/metronic8/demo12/assets/media/svg/brand-logos/twitter.svg" class="h-30px my-2" alt="">  
+</a>
+<!--end::Icon-->  
+
+<!--begin::Icon-->
+<a href="#" class="mx-4">
+<img src="/metronic8/demo12/assets/media/svg/brand-logos/dribbble-icon-1.svg" class="h-30px my-2" alt="">  
+</a>
+<!--end::Icon-->                 
+</div>
+<!--end::Body-->     
+</div>
+<!--end::Card-->       
+</div>
+<!--end::Body-->
+</div>
+<!--end::FAQ card-->
+
+</div>
+<!--end::Post-->	
+</div>
+
+
+
 {% endblock page-content %}
 <div
